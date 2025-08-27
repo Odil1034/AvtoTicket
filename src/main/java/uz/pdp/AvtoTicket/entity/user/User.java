@@ -7,11 +7,14 @@ import uz.pdp.AvtoTicket.entity.bus.Bus;
 import uz.pdp.AvtoTicket.entity.card.Card;
 import uz.pdp.AvtoTicket.entity.image.Image;
 import uz.pdp.AvtoTicket.entity.order.Order;
+import uz.pdp.AvtoTicket.entity.role.Role;
 import uz.pdp.AvtoTicket.entity.ticket.Ticket;
 import uz.pdp.AvtoTicket.enums.Gender;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -61,4 +64,12 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Card> cards;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 }
