@@ -1,4 +1,4 @@
 package uz.pdp.AvtoTicket.dto.register;
 
-public record LoginDTO(String username, String password, String email) {
+public record LoginDTO(String email, String password) {
 }

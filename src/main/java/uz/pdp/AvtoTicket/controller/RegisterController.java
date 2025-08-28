@@ -3,6 +3,7 @@ package uz.pdp.AvtoTicket.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uz.pdp.AvtoTicket.dto.ApiResponse;
 import uz.pdp.AvtoTicket.dto.register.LoginDTO;
 import uz.pdp.AvtoTicket.dto.register.SignUpDTO;
 import uz.pdp.AvtoTicket.dto.user.UserResponseDTO;
@@ -16,14 +17,15 @@ public class RegisterController {
     private final UserService userService;
 
     @GetMapping("/login")
-    public ResponseEntity<UserResponseDTO> login(@RequestBody LoginDTO loginDTO) {
+    public ApiResponse<UserResponseDTO> login(@RequestBody LoginDTO loginDTO) {
         UserResponseDTO user = userService.login(loginDTO);
-        return ResponseEntity.ok(user);
+        return ApiResponse.success(user).getBody();
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<Boolean> signUp(@RequestBody SignUpDTO signUpDTO) {
-        boolean b = userService.signUp(signUpDTO);
-        return ResponseEntity.ok(b);
+    public ApiResponse<UserResponseDTO> signUp(@RequestBody SignUpDTO signUpDTO) {
+        UserResponseDTO user = userService.signUp(signUpDTO);
+        return ApiResponse.success(user, "User successfully created ✔✔✔").getBody();
     }
+
 }

@@ -1,5 +1,7 @@
 package uz.pdp.AvtoTicket.service.userService;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.pdp.AvtoTicket.dto.register.LoginDTO;
 import uz.pdp.AvtoTicket.dto.register.SignUpDTO;
@@ -7,50 +9,92 @@ import uz.pdp.AvtoTicket.dto.user.UserCreateDTO;
 import uz.pdp.AvtoTicket.dto.user.UserResponseDTO;
 import uz.pdp.AvtoTicket.dto.user.UserUpdateDTO;
 import uz.pdp.AvtoTicket.entity.user.User;
+import uz.pdp.AvtoTicket.exceptions.UserIsDeletedException;
+import uz.pdp.AvtoTicket.exceptions.UserNotFoundException;
+import uz.pdp.AvtoTicket.exceptions.WrongPassword;
+import uz.pdp.AvtoTicket.mapper.UserMapper;
+import uz.pdp.AvtoTicket.repository.UserRepository;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImp implements UserService {
+
+
+    private final UserMapper userMapper;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
     public UserResponseDTO login(LoginDTO loginDTO) {
-        return null;
+        User user = userRepository.findByEmail(loginDTO.email())
+                .orElseThrow(() -> new UserNotFoundException("User not found by email : " + loginDTO.email()));
+        if (passwordEncoder.matches(loginDTO.password(), user.getPassword())) {
+            return userMapper.toDTO(user);
+        } else {
+            throw new WrongPassword("Password is wrong, try again");
+        }
     }
 
     @Override
-    public boolean signUp(SignUpDTO signUpDTO) {
-        return false;
+    public UserResponseDTO signUp(SignUpDTO signUpDTO) {
+        User entity = userMapper.toEntity(signUpDTO);
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        User save = userRepository.save(entity);
+        return userMapper.toDTO(save);
     }
 
     @Override
     public UserResponseDTO create(UserCreateDTO dto) {
-        return null;
+        User entity = userMapper.toEntity(dto);
+        entity.setPassword(passwordEncoder.encode(dto.password()));
+        User save = userRepository.save(entity);
+        return userMapper.toDTO(save);
     }
 
     @Override
     public UserResponseDTO getById(Long id) {
-        return null;
+        User byId = findById(id);
+        return userMapper.toDTO(byId);
     }
 
     @Override
     public List<UserResponseDTO> getAll() {
-        return List.of();
+        List<User> all = userRepository.findAll();
+        return userMapper.toDTOList(all);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        User byId = findById(id);
+        byId.setDeleted(true);
+        userRepository.save(byId);
+        return true;
     }
 
     @Override
     public UserResponseDTO update(Long userId, UserUpdateDTO dto) {
-        return null;
+        User byId = findById(userId);
+        userMapper.toUpdate(byId, dto);
+
+        if (dto.password() != null) {
+            byId.setPassword(passwordEncoder.encode(dto.password()));
+        }
+
+        User save = userRepository.save(byId);
+        return userMapper.toDTO(save);
     }
 
     @Override
-    public User findById(Long id) {
-        return null;
+    public User findById(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id : " + userId));
+        if (!user.isDeleted()) {
+            return user;
+        } else {
+            throw new UserIsDeletedException("User is deleted with id = " + userId);
+        }
     }
 }

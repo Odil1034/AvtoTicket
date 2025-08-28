@@ -2,6 +2,7 @@ package uz.pdp.AvtoTicket.entity.user;
 
 import jakarta.persistence.*;
 import lombok.*;
+import uz.pdp.AvtoTicket.dto.user.UserCreateDTO;
 import uz.pdp.AvtoTicket.entity.BaseEntity;
 import uz.pdp.AvtoTicket.entity.bus.Bus;
 import uz.pdp.AvtoTicket.entity.card.Card;
@@ -10,6 +11,7 @@ import uz.pdp.AvtoTicket.entity.order.Order;
 import uz.pdp.AvtoTicket.entity.role.Role;
 import uz.pdp.AvtoTicket.entity.ticket.Ticket;
 import uz.pdp.AvtoTicket.enums.Gender;
+import uz.pdp.AvtoTicket.enums.UserStatus;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -72,4 +74,7 @@ public class User extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 }

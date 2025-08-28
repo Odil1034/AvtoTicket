@@ -39,4 +39,5 @@ public abstract class BaseEntity {
     @LastModifiedBy
     private Long updatedBy;
 
+    private boolean isDeleted;
 }

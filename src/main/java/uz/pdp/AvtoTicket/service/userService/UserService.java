@@ -12,6 +12,6 @@ public interface UserService extends BaseService<User, UserCreateDTO, UserUpdate
 
     UserResponseDTO login(LoginDTO loginDTO);
 
-    boolean signUp(SignUpDTO signUpDTO);
+    UserResponseDTO signUp(SignUpDTO signUpDTO);
 
 }
