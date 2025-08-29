@@ -3,6 +3,8 @@ package uz.pdp.AvtoTicket.entity.permission;
 import jakarta.persistence.*;
 import lombok.*;
 import uz.pdp.AvtoTicket.entity.BaseEntity;
+import uz.pdp.AvtoTicket.enums.permission.Action;
+import uz.pdp.AvtoTicket.enums.permission.EntityType;
 
 @Getter
 @Setter
@@ -13,9 +15,15 @@ import uz.pdp.AvtoTicket.entity.BaseEntity;
 @Table(name = "permissions")
 public class Permission extends BaseEntity {
 
-    @Column(name = "permission_name", unique = true, nullable = false)
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-//    private String description;
+    @Enumerated(EnumType.STRING)
+    private Action action;
+
+    @Enumerated(EnumType.STRING)
+    private EntityType entity;
+
+    private String description;
 
 }

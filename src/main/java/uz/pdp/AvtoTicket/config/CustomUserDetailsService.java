@@ -10,7 +10,7 @@
 //import uz.pdp.AvtoTicket.entity.permission.Permission;
 //import uz.pdp.AvtoTicket.entity.role.Role;
 //import uz.pdp.AvtoTicket.entity.user.User;
-//import uz.pdp.AvtoTicket.exceptions.UserNotFoundException;
+//import uz.pdp.AvtoTicket.exceptions.NotFoundException;
 //import uz.pdp.AvtoTicket.repository.UserRepository;
 //
 //import java.util.HashSet;
@@ -25,7 +25,7 @@
 //    @Override
 //    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //        User user = userRepository.findByUsername(username)
-//                .orElseThrow(() -> new UserNotFoundException("User not found"));
+//                .orElseThrow(() -> new NotFoundException("User not found"));
 //
 //        return new CustomUserDetails(
 //                user.getId(),

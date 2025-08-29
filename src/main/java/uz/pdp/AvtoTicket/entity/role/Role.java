@@ -21,7 +21,7 @@ public class Role extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String name;
 
-//    private String description;
+    private String description;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

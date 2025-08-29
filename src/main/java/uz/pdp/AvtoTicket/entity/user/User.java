@@ -2,7 +2,6 @@ package uz.pdp.AvtoTicket.entity.user;
 
 import jakarta.persistence.*;
 import lombok.*;
-import uz.pdp.AvtoTicket.dto.user.UserCreateDTO;
 import uz.pdp.AvtoTicket.entity.BaseEntity;
 import uz.pdp.AvtoTicket.entity.bus.Bus;
 import uz.pdp.AvtoTicket.entity.card.Card;

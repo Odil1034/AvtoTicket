@@ -9,8 +9,8 @@ import uz.pdp.AvtoTicket.dto.user.UserCreateDTO;
 import uz.pdp.AvtoTicket.dto.user.UserResponseDTO;
 import uz.pdp.AvtoTicket.dto.user.UserUpdateDTO;
 import uz.pdp.AvtoTicket.entity.user.User;
-import uz.pdp.AvtoTicket.exceptions.UserIsDeletedException;
-import uz.pdp.AvtoTicket.exceptions.UserNotFoundException;
+import uz.pdp.AvtoTicket.exceptions.IsDeletedException;
+import uz.pdp.AvtoTicket.exceptions.NotFoundException;
 import uz.pdp.AvtoTicket.exceptions.WrongPassword;
 import uz.pdp.AvtoTicket.mapper.UserMapper;
 import uz.pdp.AvtoTicket.repository.UserRepository;
@@ -30,7 +30,7 @@ public class UserServiceImp implements UserService {
     @Override
     public UserResponseDTO login(LoginDTO loginDTO) {
         User user = userRepository.findByEmail(loginDTO.email())
-                .orElseThrow(() -> new UserNotFoundException("User not found by email : " + loginDTO.email()));
+                .orElseThrow(() -> new NotFoundException("User not found by email : " + loginDTO.email()));
         if (passwordEncoder.matches(loginDTO.password(), user.getPassword())) {
             return userMapper.toDTO(user);
         } else {
@@ -39,9 +39,9 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserResponseDTO signUp(SignUpDTO signUpDTO) {
-        User entity = userMapper.toEntity(signUpDTO);
-        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+    public UserResponseDTO signUp(SignUpDTO dto) {
+        User entity = userMapper.toEntity(dto);
+        entity.setPassword(passwordEncoder.encode(dto.password()));
         User save = userRepository.save(entity);
         return userMapper.toDTO(save);
     }
@@ -90,11 +90,11 @@ public class UserServiceImp implements UserService {
     @Override
     public User findById(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found with id : " + userId));
+                .orElseThrow(() -> new NotFoundException("User not found with id : " + userId));
         if (!user.isDeleted()) {
             return user;
         } else {
-            throw new UserIsDeletedException("User is deleted with id = " + userId);
+            throw new IsDeletedException("User is deleted with id = " + userId);
         }
     }
 }

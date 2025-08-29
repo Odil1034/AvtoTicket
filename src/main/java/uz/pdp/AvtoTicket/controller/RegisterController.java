@@ -17,9 +17,9 @@ public class RegisterController {
     private final UserService userService;
 
     @GetMapping("/login")
-    public ApiResponse<UserResponseDTO> login(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<UserResponseDTO> login(@RequestBody LoginDTO loginDTO) {
         UserResponseDTO user = userService.login(loginDTO);
-        return ApiResponse.success(user).getBody();
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/signup")

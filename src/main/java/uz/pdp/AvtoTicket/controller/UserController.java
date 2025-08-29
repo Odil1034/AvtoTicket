@@ -11,13 +11,13 @@ import uz.pdp.AvtoTicket.service.userService.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
         UserResponseDTO userById = userService.getById(id);
         return ResponseEntity.ok(userById);
@@ -29,20 +29,20 @@ public class UserController {
         return ResponseEntity.ok(userResponseDTO);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> deleteUser(@PathVariable Long id) {
         boolean delete = userService.delete(id);
         return ResponseEntity.ok(delete);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id,
                                                       @RequestBody UserUpdateDTO userDTO) {
         UserResponseDTO user = userService.update(id, userDTO);
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/getAll")
     public ResponseEntity<List<UserResponseDTO>> getAll() {
         List<UserResponseDTO> all = userService.getAll();
         return ResponseEntity.ok(all);
