@@ -32,6 +32,7 @@ public class PermissionServiceImp implements PermissionService {
     @Override
     public PermissionResponseDTO getById(Long id) {
         Permission byId = findById(id);
+        System.out.println(byId);
         return permissionMapper.toDTO(byId);
     }
 

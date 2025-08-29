@@ -30,7 +30,7 @@ public class PermissionController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<ApiResponse<PermissionResponseDTO>> updatePermissionById(@PathVariable Long id,
-                                                                       @RequestBody UpdatePermissionDTO dto) {
+                                                                                   @RequestBody UpdatePermissionDTO dto) {
         PermissionResponseDTO update = permissionService.update(id, dto);
         return ApiResponse.success(update, "Permission is updated successfully");
     }

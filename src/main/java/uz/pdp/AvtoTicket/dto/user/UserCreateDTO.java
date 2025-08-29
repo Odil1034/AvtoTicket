@@ -1,18 +1,19 @@
 package uz.pdp.AvtoTicket.dto.user;
 
+import jakarta.validation.constraints.NotNull;
 import uz.pdp.AvtoTicket.dto.BaseDTO;
 
 import java.time.LocalDate;
 
 public record UserCreateDTO(
-        String username,
-        String password,
-        String firstName,
-        String lastName,
+        @NotNull String username,
+        @NotNull String password,
+        @NotNull String firstName,
+        @NotNull String lastName,
         LocalDate dateOfBirth,
         String passportNumber,
-        String email,
-        String phoneNumber,
+        @NotNull String email,
+        @NotNull String phoneNumber,
         String gender
 //        Image profileImage,
 //        List<Bus>buses
