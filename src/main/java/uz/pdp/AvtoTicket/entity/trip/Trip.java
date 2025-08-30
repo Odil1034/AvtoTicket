@@ -26,7 +26,6 @@ public class Trip extends BaseEntity {
     @Column(name = "count_of_seats", nullable = false)
     private Integer countOfSeats;
 
-    @Builder.Default
     @Column(name = "is_actice")
     private boolean isActive = true;
 

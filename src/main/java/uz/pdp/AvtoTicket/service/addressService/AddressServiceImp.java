@@ -25,22 +25,19 @@ public class AddressServiceImp implements AddressService {
         Address entity = addressMapper.toEntity(dto);
         System.out.println(entity);
         Address save = addressRepository.save(entity);
-//        return addressMapper.toDTO(save);
-        return new AddressResponseDTO(save.getId(), save.getRegion(), save.getCity(), save.getDistrict(), save.getLongitude(), save.getLatitude());
+        return addressMapper.toDTO(save);
     }
 
     @Override
     public AddressResponseDTO getById(Long id) {
         Address byId = findById(id);
-//        return addressMapper.toDTO(byId);
-        return null;
+        return addressMapper.toDTO(byId);
     }
 
     @Override
     public List<AddressResponseDTO> getAll() {
         List<Address> all = addressRepository.findAll();
-//        return addressMapper.toDTOList(all);
-        return List.of();
+        return addressMapper.toDTOList(all);
     }
 
     @Override
@@ -54,10 +51,9 @@ public class AddressServiceImp implements AddressService {
     @Override
     public AddressResponseDTO update(Long addressId, UpdateAddressDTO dto) {
         Address byId = findById(addressId);
-//        addressMapper.toUpdate(byId, dto);
+        addressMapper.toUpdate(byId, dto);
         Address save = addressRepository.save(byId);
-//        return addressMapper.toDTO(save);
-        return null;
+        return addressMapper.toDTO(save);
     }
 
     @Override

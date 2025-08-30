@@ -24,7 +24,6 @@ public class Order extends BaseEntity {
     private User owner;
 
     @Column(name = "created_at", updatable = false)
-    @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "total_price")

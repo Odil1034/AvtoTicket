@@ -67,7 +67,6 @@ public class User extends BaseEntity {
     private List<Card> cards;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @Builder.Default
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

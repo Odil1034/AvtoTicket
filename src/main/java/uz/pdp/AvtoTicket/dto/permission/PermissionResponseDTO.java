@@ -7,8 +7,8 @@ import uz.pdp.AvtoTicket.enums.permission.EntityType;
 public record PermissionResponseDTO(
         Long id,
         String name,
-        String action,
-        String entity,
+        Action action,
+        EntityType entity,
         String description
 ) implements BaseDTO {
 
