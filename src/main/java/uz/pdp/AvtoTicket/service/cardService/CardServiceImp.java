@@ -2,9 +2,9 @@ package uz.pdp.AvtoTicket.service.cardService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.AvtoTicket.dto.response.CardDTO;
-import uz.pdp.AvtoTicket.dto.request.create.CreateCardDTO;
-import uz.pdp.AvtoTicket.dto.request.update.UpdateCardDTO;
+import uz.pdp.AvtoTicket.dto.card.CardResponseDTO;
+import uz.pdp.AvtoTicket.dto.card.CreateCardDTO;
+import uz.pdp.AvtoTicket.dto.card.UpdateCardDTO;
 import uz.pdp.AvtoTicket.entity.card.Card;
 import uz.pdp.AvtoTicket.exceptions.IsDeletedException;
 import uz.pdp.AvtoTicket.exceptions.NotFoundException;
@@ -20,20 +20,20 @@ public class CardServiceImp implements CardService {
     private final CardRepository cardRepository;
 
     @Override
-    public CardDTO create(CreateCardDTO dto) {
+    public CardResponseDTO create(CreateCardDTO dto) {
         Card entity = cardMapper.toEntity(dto);
         Card save = cardRepository.save(entity);
         return cardMapper.toDTO(save);
     }
 
     @Override
-    public CardDTO getById(Long id) {
+    public CardResponseDTO getById(Long id) {
         Card byId = findById(id);
         return cardMapper.toDTO(byId);
     }
 
     @Override
-    public List<CardDTO> getAll() {
+    public List<CardResponseDTO> getAll() {
         List<Card> all = cardRepository.findAll();
         return cardMapper.toDTOList(all);
     }
@@ -47,7 +47,7 @@ public class CardServiceImp implements CardService {
     }
 
     @Override
-    public CardDTO update(Long cardId, UpdateCardDTO dto) {
+    public CardResponseDTO update(Long cardId, UpdateCardDTO dto) {
         Card byId = findById(cardId);
         cardMapper.toUpdate(byId, dto);
         Card save = cardRepository.save(byId);

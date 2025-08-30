@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.AvtoTicket.dto.ApiResponse;
-import uz.pdp.AvtoTicket.dto.request.create.CreateAddressDTO;
-import uz.pdp.AvtoTicket.dto.response.AddressDTO;
-import uz.pdp.AvtoTicket.dto.request.update.UpdateAddressDTO;
+import uz.pdp.AvtoTicket.dto.address.CreateAddressDTO;
+import uz.pdp.AvtoTicket.dto.address.AddressResponseDTO;
+import uz.pdp.AvtoTicket.dto.address.UpdateAddressDTO;
 import uz.pdp.AvtoTicket.service.addressService.AddressService;
 
 @RestController
@@ -17,20 +17,20 @@ public class AddressController {
     private final AddressService addressService;
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<ApiResponse<AddressDTO>> getAddressByID(@PathVariable Long id) {
-        AddressDTO byId = addressService.getById(id);
+    public ResponseEntity<ApiResponse<AddressResponseDTO>> getAddressByID(@PathVariable Long id) {
+        AddressResponseDTO byId = addressService.getById(id);
         return ApiResponse.success(byId);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ApiResponse<AddressDTO>> createAddress(@RequestBody CreateAddressDTO dto) {
-        AddressDTO createdAddress = addressService.create(dto);
+    public ResponseEntity<ApiResponse<AddressResponseDTO>> createAddress(@RequestBody CreateAddressDTO dto) {
+        AddressResponseDTO createdAddress = addressService.create(dto);
         return ApiResponse.success(createdAddress, "Address is created successfully");
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ApiResponse<AddressDTO>> updateAddressById(@PathVariable Long id, @RequestBody UpdateAddressDTO dto) {
-        AddressDTO update = addressService.update(id, dto);
+    public ResponseEntity<ApiResponse<AddressResponseDTO>> updateAddressById(@PathVariable Long id, @RequestBody UpdateAddressDTO dto) {
+        AddressResponseDTO update = addressService.update(id, dto);
         return ApiResponse.success(update, "Address is updated successfully");
     }
 

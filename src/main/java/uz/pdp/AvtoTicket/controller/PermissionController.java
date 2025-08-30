@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.AvtoTicket.dto.ApiResponse;
-import uz.pdp.AvtoTicket.dto.request.create.CreatePermissionDTO;
-import uz.pdp.AvtoTicket.dto.response.PermissionDTO;
-import uz.pdp.AvtoTicket.dto.request.update.UpdatePermissionDTO;
+import uz.pdp.AvtoTicket.dto.permission.CreatePermissionDTO;
+import uz.pdp.AvtoTicket.dto.permission.PermissionResponseDTO;
+import uz.pdp.AvtoTicket.dto.permission.UpdatePermissionDTO;
 import uz.pdp.AvtoTicket.service.permissionService.PermissionService;
 
 @RestController
@@ -17,21 +17,21 @@ public class PermissionController {
     private final PermissionService permissionService;
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<ApiResponse<PermissionDTO>> getPermissionByID(@PathVariable Long id) {
-        PermissionDTO byId = permissionService.getById(id);
+    public ResponseEntity<ApiResponse<PermissionResponseDTO>> getPermissionByID(@PathVariable Long id) {
+        PermissionResponseDTO byId = permissionService.getById(id);
         return ApiResponse.success(byId);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ApiResponse<PermissionDTO>> createPermission(@RequestBody CreatePermissionDTO dto) {
-        PermissionDTO createdPermission = permissionService.create(dto);
+    public ResponseEntity<ApiResponse<PermissionResponseDTO>> createPermission(@RequestBody CreatePermissionDTO dto) {
+        PermissionResponseDTO createdPermission = permissionService.create(dto);
         return ApiResponse.success(createdPermission, "Permission is created successfully");
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ApiResponse<PermissionDTO>> updatePermissionById(@PathVariable Long id,
-                                                                           @RequestBody UpdatePermissionDTO dto) {
-        PermissionDTO update = permissionService.update(id, dto);
+    public ResponseEntity<ApiResponse<PermissionResponseDTO>> updatePermissionById(@PathVariable Long id,
+                                                                                   @RequestBody UpdatePermissionDTO dto) {
+        PermissionResponseDTO update = permissionService.update(id, dto);
         return ApiResponse.success(update, "Permission is updated successfully");
     }
 

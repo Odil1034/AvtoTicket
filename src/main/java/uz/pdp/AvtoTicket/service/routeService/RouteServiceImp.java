@@ -2,9 +2,9 @@ package uz.pdp.AvtoTicket.service.routeService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.AvtoTicket.dto.request.create.CreateRouteDTO;
-import uz.pdp.AvtoTicket.dto.response.RouteDTO;
-import uz.pdp.AvtoTicket.dto.request.update.UpdateRouteDTO;
+import uz.pdp.AvtoTicket.dto.route.CreateRouteDTO;
+import uz.pdp.AvtoTicket.dto.route.RouteResponseDTO;
+import uz.pdp.AvtoTicket.dto.route.UpdateRouteDTO;
 import uz.pdp.AvtoTicket.entity.route.Route;
 import uz.pdp.AvtoTicket.exceptions.IsDeletedException;
 import uz.pdp.AvtoTicket.exceptions.NotFoundException;
@@ -21,20 +21,20 @@ public class RouteServiceImp implements RouteService {
     private final RouteRepository routeRepository;
 
     @Override
-    public RouteDTO create(CreateRouteDTO dto) {
+    public RouteResponseDTO create(CreateRouteDTO dto) {
         Route entity = routeMapper.toEntity(dto);
         Route save = routeRepository.save(entity);
         return routeMapper.toDTO(save);
     }
 
     @Override
-    public RouteDTO getById(Long id) {
+    public RouteResponseDTO getById(Long id) {
         Route byId = findById(id);
         return routeMapper.toDTO(byId);
     }
 
     @Override
-    public List<RouteDTO> getAll() {
+    public List<RouteResponseDTO> getAll() {
         List<Route> all = routeRepository.findAll();
         return routeMapper.toDTOList(all);
     }
@@ -48,7 +48,7 @@ public class RouteServiceImp implements RouteService {
     }
 
     @Override
-    public RouteDTO update(Long routeId, UpdateRouteDTO dto) {
+    public RouteResponseDTO update(Long routeId, UpdateRouteDTO dto) {
         Route byId = findById(routeId);
         routeMapper.toUpdate(byId, dto);
         Route save = routeRepository.save(byId);

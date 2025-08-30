@@ -2,9 +2,9 @@ package uz.pdp.AvtoTicket.service.roleService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.AvtoTicket.dto.request.create.CreateRoleDTO;
-import uz.pdp.AvtoTicket.dto.response.RoleDTO;
-import uz.pdp.AvtoTicket.dto.request.update.UpdateRoleDTO;
+import uz.pdp.AvtoTicket.dto.role.CreateRoleDTO;
+import uz.pdp.AvtoTicket.dto.role.RoleResponseDTO;
+import uz.pdp.AvtoTicket.dto.role.UpdateRoleDTO;
 import uz.pdp.AvtoTicket.entity.permission.Permission;
 import uz.pdp.AvtoTicket.entity.role.Role;
 import uz.pdp.AvtoTicket.exceptions.IsDeletedException;
@@ -25,7 +25,7 @@ public class RoleServiceImp implements RoleService {
     private final RoleMapper roleMapper;
 
     @Override
-    public RoleDTO create(CreateRoleDTO dto) {
+    public RoleResponseDTO create(CreateRoleDTO dto) {
         Role role = roleMapper.toEntity(dto);
         Set<Permission> permissions = permissionService.findAllByIds(dto.permissionIds());
         role.setPermissions(permissions);
@@ -34,13 +34,13 @@ public class RoleServiceImp implements RoleService {
     }
 
     @Override
-    public RoleDTO getById(Long id) {
+    public RoleResponseDTO getById(Long id) {
         Role byId = findById(id);
         return roleMapper.toDTO(byId);
     }
 
     @Override
-    public List<RoleDTO> getAll() {
+    public List<RoleResponseDTO> getAll() {
         List<Role> all = roleRepository.findAll();
         return roleMapper.toDTOList(all);
     }
@@ -54,7 +54,7 @@ public class RoleServiceImp implements RoleService {
     }
 
     @Override
-    public RoleDTO update(Long roleId, UpdateRoleDTO dto) {
+    public RoleResponseDTO update(Long roleId, UpdateRoleDTO dto) {
         Role byId = findById(roleId);
         roleMapper.toUpdate(byId, dto);
         Role save = roleRepository.save(byId);

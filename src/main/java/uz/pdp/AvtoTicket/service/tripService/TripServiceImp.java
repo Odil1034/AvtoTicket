@@ -2,9 +2,9 @@ package uz.pdp.AvtoTicket.service.tripService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.AvtoTicket.dto.request.create.CreateTripDTO;
-import uz.pdp.AvtoTicket.dto.response.TripDTO;
-import uz.pdp.AvtoTicket.dto.request.update.UpdateTripDTO;
+import uz.pdp.AvtoTicket.dto.trip.CreateTripDTO;
+import uz.pdp.AvtoTicket.dto.trip.TripResponseDTO;
+import uz.pdp.AvtoTicket.dto.trip.UpdateTripDTO;
 import uz.pdp.AvtoTicket.entity.trip.Trip;
 import uz.pdp.AvtoTicket.exceptions.IsDeletedException;
 import uz.pdp.AvtoTicket.exceptions.NotFoundException;
@@ -20,20 +20,20 @@ public class TripServiceImp implements TripService {
     private final TripRepository tripRepository;
 
     @Override
-    public TripDTO create(CreateTripDTO dto) {
+    public TripResponseDTO create(CreateTripDTO dto) {
         Trip entity = tripMapper.toEntity(dto);
         Trip save = tripRepository.save(entity);
         return tripMapper.toDTO(save);
     }
 
     @Override
-    public TripDTO getById(Long id) {
+    public TripResponseDTO getById(Long id) {
         Trip byId = findById(id);
         return tripMapper.toDTO(byId);
     }
 
     @Override
-    public List<TripDTO> getAll() {
+    public List<TripResponseDTO> getAll() {
         List<Trip> all = tripRepository.findAll();
         return tripMapper.toDTOList(all);
     }
@@ -47,7 +47,7 @@ public class TripServiceImp implements TripService {
     }
 
     @Override
-    public TripDTO update(Long tripId, UpdateTripDTO dto) {
+    public TripResponseDTO update(Long tripId, UpdateTripDTO dto) {
         Trip byId = findById(tripId);
         tripMapper.toUpdate(byId, dto);
         Trip save = tripRepository.save(byId);

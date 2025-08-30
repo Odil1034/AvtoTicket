@@ -1,32 +1,25 @@
 package uz.pdp.AvtoTicket.mapper;
 
 import org.mapstruct.*;
-import uz.pdp.AvtoTicket.dto.response.UserDTO;
-import uz.pdp.AvtoTicket.entity.role.Role;
+import uz.pdp.AvtoTicket.dto.register.SignUpDTO;
+import uz.pdp.AvtoTicket.dto.user.UserCreateDTO;
+import uz.pdp.AvtoTicket.dto.user.UserResponseDTO;
+import uz.pdp.AvtoTicket.dto.user.UserUpdateDTO;
 import uz.pdp.AvtoTicket.entity.user.User;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {RoleMapper.class})
-public interface UserMapper extends EntityMapper<UserDTO, User> {
+@Mapper(componentModel = "spring", uses = {RoleMapper.class, PermissionMapper.class})
+public interface UserMapper {
 
-    @Override
-    @Mapping(source = "roles", target = "roles", qualifiedByName = "roleToName")
-    User toEntity(UserDTO dto);
+    User toEntity(UserCreateDTO dto);
 
-    @Override
-    @Mapping(source = "roles", target = "roles", qualifiedByName = "roleToName")
-    UserDTO toDto(User entity);
+    User toEntity(SignUpDTO dto);
 
-    @Override
-    List<User> toEntity(List<UserDTO> list);
+    UserResponseDTO toDTO(User user);
 
-    @Override
-    List<UserDTO> toDto(List<User> list);
+    List<UserResponseDTO> toDTOList(List<User> user);
 
-    @Named("roleToName")
-    default String roleToName(Role role) {
-        return role == null ? null : role.getName();
-    }
-
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void toUpdate(@MappingTarget User user, UserUpdateDTO dto);
 }

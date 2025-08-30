@@ -2,23 +2,31 @@ package uz.pdp.AvtoTicket.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
-import uz.pdp.AvtoTicket.dto.response.PermissionDTO;
-import uz.pdp.AvtoTicket.dto.request.update.UpdatePermissionDTO;
+import uz.pdp.AvtoTicket.dto.permission.CreatePermissionDTO;
+import uz.pdp.AvtoTicket.dto.permission.PermissionResponseDTO;
+import uz.pdp.AvtoTicket.dto.permission.UpdatePermissionDTO;
 import uz.pdp.AvtoTicket.entity.permission.Permission;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface PermissionMapper extends EntityMapper<PermissionDTO, Permission> {
-    @Override
-    Permission toEntity(PermissionDTO dto);
+public interface PermissionMapper {
 
-    @Override
-    PermissionDTO toDto(Permission entity);
+    Permission toEntity(CreatePermissionDTO dto);
 
-    @Override
-    List<Permission> toEntity(List<PermissionDTO> list);
+    Permission toEntity(PermissionResponseDTO dto);
 
-    @Override
-    List<PermissionDTO> toDto(List<Permission> list);
+    PermissionResponseDTO toDTO(Permission permission);
+
+    List<Permission> toEntityList(List<PermissionResponseDTO> dto);
+
+    List<PermissionResponseDTO> toDTOList(List<Permission> permissions);
+
+    void toUpdate(@MappingTarget Permission permission, UpdatePermissionDTO dto);
+//
+//    @Named("permissionToName")
+//    default String permissionToName(Permission permission) {
+//        return permission == null ? null : permission.getName();
+//    }
+
 }

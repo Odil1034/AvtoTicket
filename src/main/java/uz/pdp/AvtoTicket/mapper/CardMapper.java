@@ -1,23 +1,24 @@
 package uz.pdp.AvtoTicket.mapper;
 
 import org.mapstruct.Mapper;
-import uz.pdp.AvtoTicket.dto.response.CardDTO;
+import org.mapstruct.MappingTarget;
+import uz.pdp.AvtoTicket.dto.card.CardResponseDTO;
+import uz.pdp.AvtoTicket.dto.card.CreateCardDTO;
+import uz.pdp.AvtoTicket.dto.card.UpdateCardDTO;
 import uz.pdp.AvtoTicket.entity.card.Card;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface CardMapper extends EntityMapper<CardDTO, Card> {
+public interface CardMapper {
 
-    @Override
-    Card toEntity(CardDTO dto);
+    Card toEntity(CreateCardDTO dto);
 
-    @Override
-    CardDTO toDto(Card entity);
+    Card toEntity(CardResponseDTO dto);
 
-    @Override
-    List<Card> toEntity(List<CardDTO> list);
+    CardResponseDTO toDTO(Card card);
 
-    @Override
-    List<CardDTO> toDto(List<Card> list);
+    List<CardResponseDTO> toDTOList(List<Card> card);
+
+    void toUpdate(@MappingTarget Card card, UpdateCardDTO dto);
 }

@@ -2,9 +2,9 @@ package uz.pdp.AvtoTicket.service.orderService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.AvtoTicket.dto.request.create.OrderCreateDTO;
-import uz.pdp.AvtoTicket.dto.response.OrderDTO;
-import uz.pdp.AvtoTicket.dto.request.update.OrderUpdateDTO;
+import uz.pdp.AvtoTicket.dto.order.OrderCreateDTO;
+import uz.pdp.AvtoTicket.dto.order.OrderResponseDTO;
+import uz.pdp.AvtoTicket.dto.order.OrderUpdateDTO;
 import uz.pdp.AvtoTicket.entity.order.Order;
 import uz.pdp.AvtoTicket.exceptions.IsDeletedException;
 import uz.pdp.AvtoTicket.exceptions.NotFoundException;
@@ -20,20 +20,20 @@ public class OrderServiceImp implements OrderService {
     private final OrderMapper orderMapper;
 
     @Override
-    public OrderDTO create(OrderCreateDTO dto) {
+    public OrderResponseDTO create(OrderCreateDTO dto) {
         Order entity = orderMapper.toEntity(dto);
         Order save = orderRepository.save(entity);
         return orderMapper.toDTO(save);
     }
 
     @Override
-    public OrderDTO getById(Long id) {
+    public OrderResponseDTO getById(Long id) {
         Order byId = findById(id);
         return orderMapper.toDTO(byId);
     }
 
     @Override
-    public List<OrderDTO> getAll() {
+    public List<OrderResponseDTO> getAll() {
         List<Order> all = orderRepository.findAll();
         return orderMapper.toDTOList(all);
     }
@@ -47,7 +47,7 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
-    public OrderDTO update(Long orderId, OrderUpdateDTO dto) {
+    public OrderResponseDTO update(Long orderId, OrderUpdateDTO dto) {
         Order byId = findById(orderId);
         orderMapper.toUpdate(byId, dto);
         Order save = orderRepository.save(byId);

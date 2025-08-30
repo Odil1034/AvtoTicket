@@ -5,9 +5,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.pdp.AvtoTicket.dto.register.LoginDTO;
 import uz.pdp.AvtoTicket.dto.register.SignUpDTO;
-import uz.pdp.AvtoTicket.dto.request.create.UserCreateDTO;
-import uz.pdp.AvtoTicket.dto.response.UserDTO;
-import uz.pdp.AvtoTicket.dto.request.update.UserUpdateDTO;
+import uz.pdp.AvtoTicket.dto.user.UserCreateDTO;
+import uz.pdp.AvtoTicket.dto.user.UserResponseDTO;
+import uz.pdp.AvtoTicket.dto.user.UserUpdateDTO;
 import uz.pdp.AvtoTicket.entity.user.User;
 import uz.pdp.AvtoTicket.exceptions.IsDeletedException;
 import uz.pdp.AvtoTicket.exceptions.NotFoundException;
@@ -27,7 +27,7 @@ public class UserServiceImp implements UserService {
 
 
     @Override
-    public UserDTO login(LoginDTO loginDTO) {
+    public UserResponseDTO login(LoginDTO loginDTO) {
         User user = userRepository.findByEmail(loginDTO.email())
                 .orElseThrow(() -> new NotFoundException("User not found by email : " + loginDTO.email()));
         if (passwordEncoder.matches(loginDTO.password(), user.getPassword())) {
@@ -38,7 +38,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserDTO signUp(SignUpDTO dto) {
+    public UserResponseDTO signUp(SignUpDTO dto) {
         User entity = userMapper.toEntity(dto);
         entity.setPassword(passwordEncoder.encode(dto.password()));
         User save = userRepository.save(entity);
@@ -46,7 +46,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserDTO create(UserCreateDTO dto) {
+    public UserResponseDTO create(UserCreateDTO dto) {
         User entity = userMapper.toEntity(dto);
         entity.setPassword(passwordEncoder.encode(dto.password()));
         System.out.println(entity);
@@ -55,13 +55,13 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserDTO getById(Long id) {
+    public UserResponseDTO getById(Long id) {
         User byId = findById(id);
         return userMapper.toDTO(byId);
     }
 
     @Override
-    public List<UserDTO> getAll() {
+    public List<UserResponseDTO> getAll() {
         List<User> all = userRepository.findAll();
         return userMapper.toDTOList(all);
     }
@@ -75,7 +75,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserDTO update(Long userId, UserUpdateDTO dto) {
+    public UserResponseDTO update(Long userId, UserUpdateDTO dto) {
         User byId = findById(userId);
         userMapper.toUpdate(byId, dto);
 

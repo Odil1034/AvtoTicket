@@ -2,9 +2,9 @@ package uz.pdp.AvtoTicket.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
-import uz.pdp.AvtoTicket.dto.response.RouteDTO;
-import uz.pdp.AvtoTicket.dto.request.create.CreateRouteDTO;
-import uz.pdp.AvtoTicket.dto.request.update.UpdateRouteDTO;
+import uz.pdp.AvtoTicket.dto.route.RouteResponseDTO;
+import uz.pdp.AvtoTicket.dto.route.CreateRouteDTO;
+import uz.pdp.AvtoTicket.dto.route.UpdateRouteDTO;
 import uz.pdp.AvtoTicket.entity.route.Route;
 
 import java.util.List;
@@ -14,11 +14,11 @@ public interface RouteMapper {
 
     Route toEntity(CreateRouteDTO dto);
 
-//    Route toEntity(RouteDTO dto);
+    Route toEntity(RouteResponseDTO dto);
 
-    RouteDTO toDTO(Route route);
+    RouteResponseDTO toDTO(Route route);
 
-    List<RouteDTO> toDTOList(List<Route> route);
+    List<RouteResponseDTO> toDTOList(List<Route> route);
 
     void toUpdate(@MappingTarget Route route, UpdateRouteDTO dto);
 }
