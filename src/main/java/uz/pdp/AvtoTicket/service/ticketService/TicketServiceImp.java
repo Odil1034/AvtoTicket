@@ -2,9 +2,9 @@ package uz.pdp.AvtoTicket.service.ticketService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.AvtoTicket.dto.ticket.CreateTicketDTO;
-import uz.pdp.AvtoTicket.dto.ticket.TicketResponseDTO;
-import uz.pdp.AvtoTicket.dto.ticket.TicketUpdateDTO;
+import uz.pdp.AvtoTicket.dto.request.create.CreateTicketDTO;
+import uz.pdp.AvtoTicket.dto.response.TicketDTO;
+import uz.pdp.AvtoTicket.dto.request.update.TicketUpdateDTO;
 import uz.pdp.AvtoTicket.entity.ticket.Ticket;
 import uz.pdp.AvtoTicket.exceptions.IsDeletedException;
 import uz.pdp.AvtoTicket.exceptions.NotFoundException;
@@ -21,20 +21,20 @@ public class TicketServiceImp implements TicketService {
     private final TicketRepository ticketRepository;
 
     @Override
-    public TicketResponseDTO create(CreateTicketDTO dto) {
+    public TicketDTO create(CreateTicketDTO dto) {
         Ticket entity = ticketMapper.toEntity(dto);
         Ticket save = ticketRepository.save(entity);
         return ticketMapper.toDTO(save);
     }
 
     @Override
-    public TicketResponseDTO getById(Long id) {
+    public TicketDTO getById(Long id) {
         Ticket byId = findById(id);
         return ticketMapper.toDTO(byId);
     }
 
     @Override
-    public List<TicketResponseDTO> getAll() {
+    public List<TicketDTO> getAll() {
         List<Ticket> all = ticketRepository.findAll();
         return ticketMapper.toDTOList(all);
     }
@@ -48,7 +48,7 @@ public class TicketServiceImp implements TicketService {
     }
 
     @Override
-    public TicketResponseDTO update(Long ticketId, TicketUpdateDTO dto) {
+    public TicketDTO update(Long ticketId, TicketUpdateDTO dto) {
         Ticket byId = findById(ticketId);
         ticketMapper.toUpdate(byId, dto);
         Ticket save = ticketRepository.save(byId);

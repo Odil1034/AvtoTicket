@@ -3,9 +3,9 @@ package uz.pdp.AvtoTicket.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.AvtoTicket.dto.user.UserCreateDTO;
-import uz.pdp.AvtoTicket.dto.user.UserResponseDTO;
-import uz.pdp.AvtoTicket.dto.user.UserUpdateDTO;
+import uz.pdp.AvtoTicket.dto.request.create.UserCreateDTO;
+import uz.pdp.AvtoTicket.dto.response.UserDTO;
+import uz.pdp.AvtoTicket.dto.request.update.UserUpdateDTO;
 import uz.pdp.AvtoTicket.service.userService.UserService;
 
 import java.util.List;
@@ -18,16 +18,16 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
-        UserResponseDTO userById = userService.getById(id);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        UserDTO userById = userService.getById(id);
         return ResponseEntity.ok(userById);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserCreateDTO dto) {
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserCreateDTO dto) {
         System.out.println(dto);
-        UserResponseDTO userResponseDTO = userService.create(dto);
-        return ResponseEntity.ok(userResponseDTO);
+        UserDTO userDTO = userService.create(dto);
+        return ResponseEntity.ok(userDTO);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -37,15 +37,15 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id,
-                                                      @RequestBody UserUpdateDTO userDTO) {
-        UserResponseDTO user = userService.update(id, userDTO);
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id,
+                                              @RequestBody UserUpdateDTO userDTO) {
+        UserDTO user = userService.update(id, userDTO);
         return ResponseEntity.ok(user);
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<UserResponseDTO>> getAll() {
-        List<UserResponseDTO> all = userService.getAll();
+    public ResponseEntity<List<UserDTO>> getAll() {
+        List<UserDTO> all = userService.getAll();
         return ResponseEntity.ok(all);
     }
 

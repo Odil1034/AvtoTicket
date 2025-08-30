@@ -2,9 +2,9 @@ package uz.pdp.AvtoTicket.service.busService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.AvtoTicket.dto.bus.BusCreateDTO;
-import uz.pdp.AvtoTicket.dto.bus.BusResponseDTO;
-import uz.pdp.AvtoTicket.dto.bus.BusUpdateDTO;
+import uz.pdp.AvtoTicket.dto.request.create.BusCreateDTO;
+import uz.pdp.AvtoTicket.dto.response.BusDTO;
+import uz.pdp.AvtoTicket.dto.request.update.BusUpdateDTO;
 import uz.pdp.AvtoTicket.entity.bus.Bus;
 import uz.pdp.AvtoTicket.exceptions.IsDeletedException;
 import uz.pdp.AvtoTicket.exceptions.NotFoundException;
@@ -22,20 +22,20 @@ public class BusServiceImp implements BusService {
     private final BusRepository busRepository;
 
     @Override
-    public BusResponseDTO create(BusCreateDTO dto) {
+    public BusDTO create(BusCreateDTO dto) {
         Bus entity = busMapper.toEntity(dto);
         Bus save = busRepository.save(entity);
         return busMapper.toDTO(save);
     }
 
     @Override
-    public BusResponseDTO getById(Long id) {
+    public BusDTO getById(Long id) {
         Bus byId = findById(id);
         return busMapper.toDTO(byId);
     }
 
     @Override
-    public List<BusResponseDTO> getAll() {
+    public List<BusDTO> getAll() {
         List<Bus> all = busRepository.findAll();
         return busMapper.toDTOList(all);
     }
@@ -49,7 +49,7 @@ public class BusServiceImp implements BusService {
     }
 
     @Override
-    public BusResponseDTO update(Long busId, BusUpdateDTO dto) {
+    public BusDTO update(Long busId, BusUpdateDTO dto) {
         Bus byId = findById(busId);
         busMapper.toUpdate(byId, dto);
         Bus save = busRepository.save(byId);

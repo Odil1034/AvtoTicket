@@ -1,24 +1,22 @@
 package uz.pdp.AvtoTicket.mapper;
 
 import org.mapstruct.*;
-import uz.pdp.AvtoTicket.dto.bus.BusCreateDTO;
-import uz.pdp.AvtoTicket.dto.bus.BusResponseDTO;
-import uz.pdp.AvtoTicket.dto.bus.BusUpdateDTO;
+import uz.pdp.AvtoTicket.dto.response.BusDTO;
 import uz.pdp.AvtoTicket.entity.bus.Bus;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface BusMapper {
+public interface BusMapper extends EntityMapper<BusDTO, Bus> {
+    @Override
+    Bus toEntity(BusDTO dto);
 
-    Bus toEntity(BusCreateDTO dto);
+    @Override
+    BusDTO toDto(Bus entity);
 
-    Bus toEntity(BusResponseDTO dto);
+    @Override
+    List<Bus> toEntity(List<BusDTO> list);
 
-    BusResponseDTO toDTO(Bus bus);
-
-    List<BusResponseDTO> toDTOList(List<Bus> bus);
-
-    void toUpdate(@MappingTarget Bus bus, BusUpdateDTO dto);
-
+    @Override
+    List<BusDTO> toDto(List<Bus> list);
 }

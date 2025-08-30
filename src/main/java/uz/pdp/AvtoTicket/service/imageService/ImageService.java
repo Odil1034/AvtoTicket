@@ -1,12 +1,12 @@
 package uz.pdp.AvtoTicket.service.imageService;
 
-import uz.pdp.AvtoTicket.dto.image.ImageResponseDTO;
-import uz.pdp.AvtoTicket.dto.image.CreateImageDTO;
-import uz.pdp.AvtoTicket.dto.image.ImageUpdateDTO;
+import uz.pdp.AvtoTicket.dto.response.ImageDTO;
+import uz.pdp.AvtoTicket.dto.request.create.CreateImageDTO;
+import uz.pdp.AvtoTicket.dto.request.update.ImageUpdateDTO;
 import uz.pdp.AvtoTicket.entity.image.Image;
 import uz.pdp.AvtoTicket.service.BaseService;
 
-public interface ImageService extends BaseService<Image, CreateImageDTO, ImageUpdateDTO, ImageResponseDTO> {
+public interface ImageService extends BaseService<Image, CreateImageDTO, ImageUpdateDTO, ImageDTO> {
     Image uploadFile(CreateImageDTO dto);
-    ImageResponseDTO downloadImage(String generatedName);
+    ImageDTO downloadImage(String generatedName);
 }

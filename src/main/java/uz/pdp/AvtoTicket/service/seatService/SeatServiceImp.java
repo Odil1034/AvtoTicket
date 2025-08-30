@@ -2,9 +2,9 @@ package uz.pdp.AvtoTicket.service.seatService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.AvtoTicket.dto.seat.CreateSeatDTO;
-import uz.pdp.AvtoTicket.dto.seat.SeatResponseDTO;
-import uz.pdp.AvtoTicket.dto.seat.UpdateSeatDTO;
+import uz.pdp.AvtoTicket.dto.request.create.CreateSeatDTO;
+import uz.pdp.AvtoTicket.dto.response.SeatDTO;
+import uz.pdp.AvtoTicket.dto.request.update.UpdateSeatDTO;
 import uz.pdp.AvtoTicket.entity.seat.Seat;
 import uz.pdp.AvtoTicket.exceptions.IsDeletedException;
 import uz.pdp.AvtoTicket.exceptions.NotFoundException;
@@ -20,20 +20,20 @@ public class SeatServiceImp implements SeatService {
     private final SeatRepository seatRepository;
 
     @Override
-    public SeatResponseDTO create(CreateSeatDTO dto) {
+    public SeatDTO create(CreateSeatDTO dto) {
         Seat entity = seatMapper.toEntity(dto);
         Seat save = seatRepository.save(entity);
         return seatMapper.toDTO(save);
     }
 
     @Override
-    public SeatResponseDTO getById(Long id) {
+    public SeatDTO getById(Long id) {
         Seat byId = findById(id);
         return seatMapper.toDTO(byId);
     }
 
     @Override
-    public List<SeatResponseDTO> getAll() {
+    public List<SeatDTO> getAll() {
         List<Seat> all = seatRepository.findAll();
         return seatMapper.toDTOList(all);
     }
@@ -47,7 +47,7 @@ public class SeatServiceImp implements SeatService {
     }
 
     @Override
-    public SeatResponseDTO update(Long seatId, UpdateSeatDTO dto) {
+    public SeatDTO update(Long seatId, UpdateSeatDTO dto) {
         Seat byId = findById(seatId);
         seatMapper.toUpdate(byId, dto);
         Seat save = seatRepository.save(byId);

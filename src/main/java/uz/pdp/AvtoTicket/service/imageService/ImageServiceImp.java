@@ -1,9 +1,9 @@
 package uz.pdp.AvtoTicket.service.imageService;
 
 import org.springframework.stereotype.Service;
-import uz.pdp.AvtoTicket.dto.image.ImageResponseDTO;
-import uz.pdp.AvtoTicket.dto.image.CreateImageDTO;
-import uz.pdp.AvtoTicket.dto.image.ImageUpdateDTO;
+import uz.pdp.AvtoTicket.dto.response.ImageDTO;
+import uz.pdp.AvtoTicket.dto.request.create.CreateImageDTO;
+import uz.pdp.AvtoTicket.dto.request.update.ImageUpdateDTO;
 import uz.pdp.AvtoTicket.entity.image.Image;
 
 import java.util.List;
@@ -16,22 +16,22 @@ public class ImageServiceImp implements ImageService {
     }
 
     @Override
-    public ImageResponseDTO downloadImage(String generatedName) {
+    public ImageDTO downloadImage(String generatedName) {
         return null;
     }
 
     @Override
-    public ImageResponseDTO create(CreateImageDTO dto) {
+    public ImageDTO create(CreateImageDTO dto) {
         return null;
     }
 
     @Override
-    public ImageResponseDTO getById(Long id) {
+    public ImageDTO getById(Long id) {
         return null;
     }
 
     @Override
-    public List<ImageResponseDTO> getAll() {
+    public List<ImageDTO> getAll() {
         return List.of();
     }
 
@@ -41,7 +41,7 @@ public class ImageServiceImp implements ImageService {
     }
 
     @Override
-    public ImageResponseDTO update(Long id, ImageUpdateDTO dto) {
+    public ImageDTO update(Long id, ImageUpdateDTO dto) {
         return null;
     }
 

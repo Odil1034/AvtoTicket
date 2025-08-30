@@ -2,9 +2,9 @@ package uz.pdp.AvtoTicket.service.permissionService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.AvtoTicket.dto.permission.CreatePermissionDTO;
-import uz.pdp.AvtoTicket.dto.permission.PermissionResponseDTO;
-import uz.pdp.AvtoTicket.dto.permission.UpdatePermissionDTO;
+import uz.pdp.AvtoTicket.dto.request.create.CreatePermissionDTO;
+import uz.pdp.AvtoTicket.dto.response.PermissionDTO;
+import uz.pdp.AvtoTicket.dto.request.update.UpdatePermissionDTO;
 import uz.pdp.AvtoTicket.entity.permission.Permission;
 import uz.pdp.AvtoTicket.exceptions.IsDeletedException;
 import uz.pdp.AvtoTicket.exceptions.NotFoundException;
@@ -23,21 +23,21 @@ public class PermissionServiceImp implements PermissionService {
     private final PermissionMapper permissionMapper;
 
     @Override
-    public PermissionResponseDTO create(CreatePermissionDTO dto) {
+    public PermissionDTO create(CreatePermissionDTO dto) {
         Permission permission = permissionMapper.toEntity(dto);
         Permission save = permissionRepository.save(permission);
         return permissionMapper.toDTO(save);
     }
 
     @Override
-    public PermissionResponseDTO getById(Long id) {
+    public PermissionDTO getById(Long id) {
         Permission byId = findById(id);
         System.out.println(byId);
         return permissionMapper.toDTO(byId);
     }
 
     @Override
-    public List<PermissionResponseDTO> getAll() {
+    public List<PermissionDTO> getAll() {
         List<Permission> all = permissionRepository.findAll();
         return permissionMapper.toDTOList(all);
     }
@@ -51,7 +51,7 @@ public class PermissionServiceImp implements PermissionService {
     }
 
     @Override
-    public PermissionResponseDTO update(Long permissionId, UpdatePermissionDTO dto) {
+    public PermissionDTO update(Long permissionId, UpdatePermissionDTO dto) {
         Permission byId = findById(permissionId);
         permissionMapper.toUpdate(byId, dto);
         Permission save = permissionRepository.save(byId);

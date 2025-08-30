@@ -2,9 +2,8 @@ package uz.pdp.AvtoTicket.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
-import uz.pdp.AvtoTicket.dto.trip.CreateTripDTO;
-import uz.pdp.AvtoTicket.dto.trip.TripResponseDTO;
-import uz.pdp.AvtoTicket.dto.trip.UpdateTripDTO;
+import uz.pdp.AvtoTicket.dto.response.TripDTO;
+import uz.pdp.AvtoTicket.dto.request.update.UpdateTripDTO;
 import uz.pdp.AvtoTicket.entity.trip.Trip;
 
 import java.util.List;
@@ -12,13 +11,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface TripMapper {
 
-    Trip toEntity(CreateTripDTO dto);
+    TripDTO toDTO(Trip trip);
 
-    Trip toEntity(TripResponseDTO dto);
-
-    TripResponseDTO toDTO(Trip trip);
-
-    List<TripResponseDTO> toDTOList(List<Trip> trip);
+    List<TripDTO> toDTOList(List<Trip> trip);
 
     void toUpdate(@MappingTarget Trip trip, UpdateTripDTO dto);
 

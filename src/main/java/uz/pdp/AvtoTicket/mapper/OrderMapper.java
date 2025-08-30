@@ -1,25 +1,22 @@
 package uz.pdp.AvtoTicket.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import uz.pdp.AvtoTicket.dto.order.OrderCreateDTO;
-import uz.pdp.AvtoTicket.dto.order.OrderResponseDTO;
-import uz.pdp.AvtoTicket.dto.order.OrderUpdateDTO;
+import uz.pdp.AvtoTicket.dto.response.OrderDTO;
 import uz.pdp.AvtoTicket.entity.order.Order;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface OrderMapper {
+public interface OrderMapper extends EntityMapper<OrderDTO, Order> {
+    @Override
+    Order toEntity(OrderDTO dto);
 
-    Order toEntity(OrderCreateDTO dto);
+    @Override
+    OrderDTO toDto(Order entity);
 
-    Order toEntity(OrderResponseDTO dto);
+    @Override
+    List<Order> toEntity(List<OrderDTO> list);
 
-    OrderResponseDTO toDTO(Order order);
-
-    List<OrderResponseDTO> toDTOList(List<Order> order);
-
-    void toUpdate(@MappingTarget Order order, OrderUpdateDTO dto);
-
+    @Override
+    List<OrderDTO> toDto(List<Order> list);
 }

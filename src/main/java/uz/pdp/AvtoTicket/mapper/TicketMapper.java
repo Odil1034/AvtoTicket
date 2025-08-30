@@ -2,9 +2,9 @@ package uz.pdp.AvtoTicket.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
-import uz.pdp.AvtoTicket.dto.ticket.CreateTicketDTO;
-import uz.pdp.AvtoTicket.dto.ticket.TicketResponseDTO;
-import uz.pdp.AvtoTicket.dto.ticket.TicketUpdateDTO;
+import uz.pdp.AvtoTicket.dto.request.create.CreateTicketDTO;
+import uz.pdp.AvtoTicket.dto.response.TicketDTO;
+import uz.pdp.AvtoTicket.dto.request.update.TicketUpdateDTO;
 import uz.pdp.AvtoTicket.entity.ticket.Ticket;
 
 import java.util.List;
@@ -14,11 +14,11 @@ public interface TicketMapper {
 
     Ticket toEntity(CreateTicketDTO dto);
 
-    Ticket toEntity(TicketResponseDTO dto);
+//    Ticket toEntity(TicketDTO dto);
 
-    TicketResponseDTO toDTO(Ticket ticket);
+    TicketDTO toDTO(Ticket ticket);
 
-    List<TicketResponseDTO> toDTOList(List<Ticket> ticket);
+    List<TicketDTO> toDTOList(List<Ticket> ticket);
 
     void toUpdate(@MappingTarget Ticket ticket, TicketUpdateDTO dto);
 
