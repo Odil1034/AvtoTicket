@@ -50,7 +50,6 @@ public class UserServiceImp implements UserService {
     public UserResponseDTO create(UserCreateDTO dto) {
         User entity = userMapper.toEntity(dto);
         entity.setPassword(passwordEncoder.encode(dto.password()));
-        System.out.println(entity);
         User save = userRepository.save(entity);
         return userMapper.toDTO(save);
     }

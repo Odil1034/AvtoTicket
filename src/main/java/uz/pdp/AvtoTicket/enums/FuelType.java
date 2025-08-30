@@ -3,8 +3,7 @@ package uz.pdp.AvtoTicket.enums;
 public enum FuelType {
 
     DIESEL,
-    PETROL,
-    GAS,
+    COMPRESSED_GAS,
     ELECTRIC
 
 }

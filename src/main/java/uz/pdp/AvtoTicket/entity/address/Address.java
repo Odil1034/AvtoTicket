@@ -12,7 +12,6 @@ import uz.pdp.AvtoTicket.entity.BaseEntity;
 @Builder
 @Entity
 @Table(name = "addresses")
-@ToString
 public class Address extends BaseEntity {
 
     private String region;
