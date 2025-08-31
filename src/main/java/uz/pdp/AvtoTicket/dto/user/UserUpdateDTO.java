@@ -1,6 +1,6 @@
 package uz.pdp.AvtoTicket.dto.user;
 
-import uz.pdp.AvtoTicket.dto.BaseDTO;
+import uz.pdp.AvtoTicket.dto.marker.DTO;
 
 import java.time.LocalDate;
 
@@ -20,5 +20,5 @@ public record UserUpdateDTO(
 //        List<Ticket>tickets
 //        List<Card>cards
 //        Set<Role>roles
-) implements BaseDTO {
+) implements DTO {
 }

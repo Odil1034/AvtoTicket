@@ -1,7 +1,7 @@
 package uz.pdp.AvtoTicket.service.userService;
 
-import uz.pdp.AvtoTicket.dto.register.LoginDTO;
-import uz.pdp.AvtoTicket.dto.register.SignUpDTO;
+import uz.pdp.AvtoTicket.dto.auth.LoginDTO;
+import uz.pdp.AvtoTicket.dto.auth.SignUpDTO;
 import uz.pdp.AvtoTicket.dto.user.UserCreateDTO;
 import uz.pdp.AvtoTicket.dto.user.UserResponseDTO;
 import uz.pdp.AvtoTicket.dto.user.UserUpdateDTO;

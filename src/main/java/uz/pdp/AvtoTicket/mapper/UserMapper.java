@@ -1,8 +1,7 @@
 package uz.pdp.AvtoTicket.mapper;
 
 import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
-import uz.pdp.AvtoTicket.dto.register.SignUpDTO;
+import uz.pdp.AvtoTicket.dto.auth.SignUpDTO;
 import uz.pdp.AvtoTicket.dto.user.UserCreateDTO;
 import uz.pdp.AvtoTicket.dto.user.UserResponseDTO;
 import uz.pdp.AvtoTicket.dto.user.UserUpdateDTO;

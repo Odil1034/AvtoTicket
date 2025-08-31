@@ -1,6 +1,7 @@
 package uz.pdp.AvtoTicket.service.permissionService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import uz.pdp.AvtoTicket.dto.permission.CreatePermissionDTO;
 import uz.pdp.AvtoTicket.dto.permission.PermissionResponseDTO;

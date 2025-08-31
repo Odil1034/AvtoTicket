@@ -1,14 +1,14 @@
 package uz.pdp.AvtoTicket.service;
 
-import uz.pdp.AvtoTicket.dto.BaseDTO;
+import uz.pdp.AvtoTicket.dto.marker.DTO;
 import uz.pdp.AvtoTicket.entity.BaseEntity;
 
 import java.util.List;
 
 public interface BaseService<T extends BaseEntity,
-        CreateDTO extends BaseDTO,
-        UpdateDTO extends BaseDTO,
-        ResponseDTO extends BaseDTO> {
+        CreateDTO extends DTO,
+        UpdateDTO extends DTO,
+        ResponseDTO extends DTO> {
 
     ResponseDTO create(CreateDTO dto);
 
