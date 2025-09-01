@@ -3,6 +3,8 @@ package uz.pdp.AutoTicket.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.lang.annotation.Target;
+
 @Getter
 @Setter
 @AllArgsConstructor

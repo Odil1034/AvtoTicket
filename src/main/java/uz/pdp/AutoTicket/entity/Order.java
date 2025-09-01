@@ -20,16 +20,16 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "owner_id")
     private User owner;
 
-    @Builder.Default
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "total_price")
     private Double totalPrice;
 
+    @Builder.Default
     @Column(length = 10)
     @Enumerated(EnumType.STRING)
-    private PaymentStatus status;
+    private PaymentStatus status = PaymentStatus.FAILED;
 
     @OneToMany(mappedBy = "order")
     private List<Ticket> tickets;

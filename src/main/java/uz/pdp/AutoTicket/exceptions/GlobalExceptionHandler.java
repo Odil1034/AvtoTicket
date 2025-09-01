@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({IsDeletedException.class, NotFoundException.class, WrongPassword.class})
-    public ErrorResponse notFoundException(HttpServletRequest req, NotFoundException exception) {
+    @ExceptionHandler(BaseException.class)
+    public ErrorResponse notFoundException(HttpServletRequest req, ResourceNotFoundException exception) {
         return new ErrorResponse(
                 String.valueOf(exception.getStatus().value()),
                 req.getRequestURI(),

@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Getter
 @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "Data is deleted")
-public class NotFoundException extends RuntimeException {
+public class ResourceNotFoundException extends RuntimeException {
 
     private final HttpStatus status = HttpStatus.NOT_FOUND;
 
-    public NotFoundException(String message) {
+    public ResourceNotFoundException(String message) {
         super(message);
     }
 }

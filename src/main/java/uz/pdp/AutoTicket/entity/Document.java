@@ -11,10 +11,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "images")
-public class Image extends BaseEntity {
+@Table(name = "documents")
+public class Document extends BaseEntity {
 
-    @Column(name = "original_name", updatable = false)
+    @Column(name = "original_name", nullable = false, updatable = false)
     private String originalName; // profileImage
 
     @Column(name = "mime_type")

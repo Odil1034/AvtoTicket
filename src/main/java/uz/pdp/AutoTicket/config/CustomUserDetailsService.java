@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import uz.pdp.AutoTicket.entity.Permission;
 import uz.pdp.AutoTicket.entity.Role;
 import uz.pdp.AutoTicket.entity.User;
-import uz.pdp.AutoTicket.exceptions.NotFoundException;
+import uz.pdp.AutoTicket.exceptions.ResourceNotFoundException;
 import uz.pdp.AutoTicket.repository.UserRepository;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new NotFoundException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         return new CustomUserDetails(
                 user.getId(),
@@ -47,7 +47,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
 
             for (Permission permission : role.getPermissions()) {
-                authorities.add(new SimpleGrantedAuthority(permission.getName()));
+                authorities.add(new SimpleGrantedAuthority(permission.getAccess()));
             }
         }
 

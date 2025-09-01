@@ -7,7 +7,10 @@ import uz.pdp.AutoTicket.dto.role.RoleResponseDTO;
 import uz.pdp.AutoTicket.dto.role.UpdateRoleDTO;
 import uz.pdp.AutoTicket.entity.Role;
 
+import java.util.Set;
+
 @Service
 public interface RoleService
         extends GenericCruidService<Long, Role, RoleResponseDTO, CreateRoleDTO, UpdateRoleDTO> {
+    String getRoleStr(Set<Role> roles);
 }

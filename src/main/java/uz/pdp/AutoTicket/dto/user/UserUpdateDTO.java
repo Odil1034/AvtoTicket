@@ -14,7 +14,7 @@ public record UserUpdateDTO(
         String email,
         String phoneNumber,
         String gender
-//        Image profileImage,
+//        Documents profileImage,
 //        List<Bus>buses
 //        List<Order>orders
 //        List<Ticket>tickets

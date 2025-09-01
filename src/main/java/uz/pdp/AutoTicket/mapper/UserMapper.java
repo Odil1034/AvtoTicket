@@ -12,6 +12,6 @@ import uz.pdp.AutoTicket.entity.User;
 public interface UserMapper
         extends GenericMapper<User, UserResponseDTO, UserCreateDTO, UserUpdateDTO> {
 
-    CustomUserDetails toCustomUserDetails(User user);
+//    CustomUserDetails toCustomUserDetails(User user);
 
 }

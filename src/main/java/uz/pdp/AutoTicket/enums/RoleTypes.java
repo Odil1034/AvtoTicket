@@ -6,7 +6,7 @@ import uz.pdp.AutoTicket.utils.DescriptionConstants;
 
 import java.util.Set;
 
-import static uz.pdp.AutoTicket.enums.Permission.*;
+import static uz.pdp.AutoTicket.enums.PermissionTypes.*;
 
 /**
  * @author Baxriddinov Odiljon
@@ -15,7 +15,7 @@ import static uz.pdp.AutoTicket.enums.Permission.*;
 
 @Getter
 @AllArgsConstructor
-public enum Role {
+public enum RoleTypes {
 
     USER(DescriptionConstants.DESCRIPTION_USER,
             Set.of(VIEW_OWN_PROFILE,
@@ -44,7 +44,7 @@ public enum Role {
     ADMIN(DescriptionConstants.DESCRIPTION_ADMIN,
             Set.of(MANAGE_USERS, // create, update, deactivate_accounts
                     MANAGE_DRIVERS, // create, update, deactivate_accounts,
-                    MANAGE_TRIPS_AND_SCHEDULES, // CRUID
+                    MANAGE_TRIPS_AND_SCHEDULES, // CRUD
                     VIEW_ALL_BOOKINGS,
                     GENERATE_REPORTS,
                     MODERATE_REVIEWS_AND_RATINGS,
@@ -58,5 +58,5 @@ public enum Role {
                     EMERGENCY_ACTIONS));
 
     private final String description;
-    private final Set<Permission> permissions;
+    private final Set<PermissionTypes> permissions;
 }

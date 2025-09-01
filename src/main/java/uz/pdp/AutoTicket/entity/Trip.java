@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 public class Trip extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "route_id", nullable = false)
     private Route route;
 
     private LocalDateTime departure;
@@ -26,9 +27,11 @@ public class Trip extends BaseEntity {
     private Integer countOfSeats;
 
     @Builder.Default
+    @Enumerated(EnumType.STRING)
     @Column(name = "trip_status")
-    private TripStatus isActive = TripStatus.DELAYED;
+    private TripStatus isActive = TripStatus.STARTED;
 
+    @Column(nullable = false)
     private Double price;
 
 }

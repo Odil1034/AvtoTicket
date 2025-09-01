@@ -3,6 +3,9 @@ package uz.pdp.AutoTicket.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -12,15 +15,11 @@ import lombok.*;
 @Table(name = "permissions")
 public class Permission extends BaseEntity {
 
-    @Column(name = "name", unique = true, nullable = false)
-    private String name;
+    @Column(name = "access", unique = true, nullable = false)
+    private String access;
 
-    @Enumerated(EnumType.STRING)
-    private Action action;
-
-    @Enumerated(EnumType.STRING)
-    private EntityType entity;
-
-    private String description;
+    @Builder.Default
+    @ManyToMany(mappedBy = "permissions")
+    private Set<Role> roles = new HashSet<>();
 
 }

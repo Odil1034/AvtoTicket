@@ -25,22 +25,17 @@ public abstract class BaseEntity {
     private Long id;
 
     @CreatedBy
-    @Column(name = "created_by")
-    private Long createdBy;
+    private String createdBy;
 
     @CreatedDate
-    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     @LastModifiedBy
-    @Column(name = "updated_by")
     private Long updatedBy;
 
     @Builder.Default
-    @Column(name = "is_deleted")
     private boolean isDeleted = false;
 }

@@ -18,11 +18,11 @@ public record TokenDTO(
         @JsonProperty("token")
         @NotBlank @NotNull String token,
 
-        @JsonProperty("expiredAt")
-        @NotNull LocalDateTime expiredAt,
-
         @JsonProperty("issuedAt")
         @NotNull LocalDateTime issuedAt,
+
+        @JsonProperty("expiredAt")
+        @NotNull LocalDateTime expiredAt,
 
         @JsonProperty("expiresIn")
         @NotNull Long expiresIn

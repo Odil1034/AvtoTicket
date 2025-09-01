@@ -1,5 +1,6 @@
 package uz.pdp.AutoTicket.service.imp;
 
+import lombok.RequiredArgsConstructor;
 import uz.pdp.AutoTicket.dto.Response;
 import uz.pdp.AutoTicket.dto.user.UserCreateDTO;
 import uz.pdp.AutoTicket.dto.user.UserResponseDTO;
@@ -8,6 +9,7 @@ import uz.pdp.AutoTicket.entity.User;
 import uz.pdp.AutoTicket.mapper.UserMapper;
 import uz.pdp.AutoTicket.repository.UserRepository;
 import uz.pdp.AutoTicket.service.AbstractService;
+import uz.pdp.AutoTicket.service.RoleService;
 import uz.pdp.AutoTicket.service.UserService;
 
 import org.springframework.stereotype.Service;
@@ -16,9 +18,14 @@ import java.util.List;
 
 @Service
 public class UserServiceImp extends AbstractService<UserRepository, UserMapper> implements UserService {
-    public UserServiceImp(UserRepository repository, UserMapper mapper) {
+
+    private final RoleService roleService;
+
+    public UserServiceImp(UserRepository repository, UserMapper mapper, RoleService roleService) {
         super(repository, mapper);
+        this.roleService = roleService;
     }
+
     @Override
     public User findByUsername(String username) {
         return null;
@@ -51,7 +58,6 @@ public class UserServiceImp extends AbstractService<UserRepository, UserMapper> 
 
     @Override
     public Response<List<UserResponseDTO>> findAll() {
-        return null;
+        return Response.ok(List.of());
     }
-
 }

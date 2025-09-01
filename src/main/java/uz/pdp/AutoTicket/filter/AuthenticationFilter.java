@@ -1,4 +1,4 @@
-package uz.pdp.AutoTicket.config.filter;
+package uz.pdp.AutoTicket.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
