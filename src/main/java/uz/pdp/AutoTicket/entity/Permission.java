@@ -2,6 +2,8 @@ package uz.pdp.AutoTicket.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import uz.pdp.AutoTicket.enums.permission.Action;
+import uz.pdp.AutoTicket.enums.permission.EntityType;
 
 import java.util.HashSet;
 import java.util.Set;
