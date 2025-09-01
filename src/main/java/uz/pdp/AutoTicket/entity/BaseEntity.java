@@ -1,10 +1,7 @@
 package uz.pdp.AutoTicket.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -28,16 +25,22 @@ public abstract class BaseEntity {
     private Long id;
 
     @CreatedBy
-    private String createdBy;
+    @Column(name = "created_by")
+    private Long createdBy;
 
     @CreatedDate
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     @LastModifiedBy
+    @Column(name = "updated_by")
     private Long updatedBy;
 
-    private boolean isDeleted;
+    @Builder.Default
+    @Column(name = "is_deleted")
+    private boolean isDeleted = false;
 }

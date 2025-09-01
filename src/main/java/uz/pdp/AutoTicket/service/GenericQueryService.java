@@ -18,5 +18,5 @@ public interface GenericQueryService<
     extends GenericService {
 
     uz.pdp.AutoTicket.dto.Response<R> find(@NotNull ID id);
-    List<uz.pdp.AutoTicket.dto.Response<R>> findAll();
+    uz.pdp.AutoTicket.dto.Response<List<R>> findAll();
 }

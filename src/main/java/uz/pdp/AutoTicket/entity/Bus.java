@@ -2,6 +2,7 @@ package uz.pdp.AutoTicket.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import uz.pdp.AutoTicket.enums.BusStatus;
 import uz.pdp.AutoTicket.enums.FuelType;
 import uz.pdp.AutoTicket.enums.ModelType;
 
@@ -46,5 +47,9 @@ public class Bus extends BaseEntity {
 
     @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Seat> seats;
+
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    private BusStatus status = BusStatus.AVAILABILITY;
 
 }

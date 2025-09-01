@@ -1,6 +1,7 @@
 package uz.pdp.AutoTicket.controller;
 
 import lombok.RequiredArgsConstructor;
+import uz.pdp.AutoTicket.dto.Response;
 import uz.pdp.AutoTicket.dto.user.UserCreateDTO;
 import uz.pdp.AutoTicket.dto.user.UserResponseDTO;
 import uz.pdp.AutoTicket.dto.user.UserUpdateDTO;
@@ -44,9 +45,8 @@ public class UserController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<UserResponseDTO>> getAll() {
-        List<UserResponseDTO> all = userService.getAll();
-        return ResponseEntity.ok(all);
+    public ResponseEntity<Response<List<UserResponseDTO>>> getAll() {
+        return userService.findAll();
     }
 
 }

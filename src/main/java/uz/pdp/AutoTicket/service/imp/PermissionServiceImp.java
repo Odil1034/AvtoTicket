@@ -1,5 +1,6 @@
 package uz.pdp.AutoTicket.service.imp;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import uz.pdp.AutoTicket.dto.Response;
@@ -12,19 +13,20 @@ import uz.pdp.AutoTicket.repository.PermissionRepository;
 import uz.pdp.AutoTicket.service.AbstractService;
 import uz.pdp.AutoTicket.service.PermissionService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Service
 public class PermissionServiceImp
         extends AbstractService<PermissionRepository, PermissionMapper> implements PermissionService {
-    public PermissionServiceImp(PermissionRepository repository, PermissionMapper mapper) {
+
+    public PermissionServiceImp(PermissionRepository repository, @Qualifier("permissionMapper") PermissionMapper mapper) {
         super(repository, mapper);
     }
 
     @Override
     public Response<PermissionResponseDTO> create(CreatePermissionDTO dto) {
-        userRepository
         return null;
     }
 
@@ -44,8 +46,13 @@ public class PermissionServiceImp
     }
 
     @Override
-    public List<Response<PermissionResponseDTO>> findAll() {
-        return List.of();
+    public Response<List<PermissionResponseDTO>> findAll() {
+        List<Permission> all = repository.findAll();
+        List<PermissionResponseDTO> dtos = new ArrayList<>();
+        for (Permission permission : all) {
+            dtos.add(mapper.toDto(permission));
+        }
+        return Response.ok(200, dtos);
     }
 
     @Override

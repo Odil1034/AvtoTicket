@@ -1,6 +1,5 @@
 package uz.pdp.AutoTicket.service.imp;
 
-import lombok.RequiredArgsConstructor;
 import uz.pdp.AutoTicket.dto.Response;
 import uz.pdp.AutoTicket.dto.user.UserCreateDTO;
 import uz.pdp.AutoTicket.dto.user.UserResponseDTO;
@@ -16,12 +15,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class UserServiceImp extends AbstractService<UserRepository, UserMapper> implements UserService {
     public UserServiceImp(UserRepository repository, UserMapper mapper) {
         super(repository, mapper);
     }
-
     @Override
     public User findByUsername(String username) {
         return null;
@@ -53,7 +50,8 @@ public class UserServiceImp extends AbstractService<UserRepository, UserMapper> 
     }
 
     @Override
-    public List<Response<UserResponseDTO>> findAll() {
-        return List.of();
+    public Response<List<UserResponseDTO>> findAll() {
+        return null;
     }
+
 }

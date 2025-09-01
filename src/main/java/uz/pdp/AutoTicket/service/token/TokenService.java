@@ -3,6 +3,7 @@ package uz.pdp.AutoTicket.service.token;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import uz.pdp.AutoTicket.dto.Response;
+import uz.pdp.AutoTicket.dto.auth.RefreshTokenRequestDTO;
 import uz.pdp.AutoTicket.dto.auth.TokenRequestDTO;
 import uz.pdp.AutoTicket.dto.auth.TokenResponseDTO;
 import uz.pdp.AutoTicket.entity.User;
@@ -25,7 +26,7 @@ public class TokenService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
 
-    private Response<TokenResponseDTO> generateToken(TokenRequestDTO dto) {
+    public Response<TokenResponseDTO> generateToken(TokenRequestDTO dto) {
 
         String username = dto.username();
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, dto.password()));
@@ -33,6 +34,10 @@ public class TokenService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("User not found with username: " + username));
 
-        
+        return Response.ok(null);
+    }
+
+    public Response<TokenResponseDTO> refreshToken(RefreshTokenRequestDTO dto) {
+        return null;
     }
 }

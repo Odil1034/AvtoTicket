@@ -2,6 +2,7 @@ package uz.pdp.AutoTicket.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import uz.pdp.AutoTicket.enums.TripStatus;
 
 import java.time.LocalDateTime;
 
@@ -24,8 +25,9 @@ public class Trip extends BaseEntity {
     @Column(name = "count_of_seats", nullable = false)
     private Integer countOfSeats;
 
-    @Column(name = "is_actice")
-    private boolean isActive = true;
+    @Builder.Default
+    @Column(name = "trip_status")
+    private TripStatus isActive = TripStatus.DELAYED;
 
     private Double price;
 
