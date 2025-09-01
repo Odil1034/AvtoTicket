@@ -1,7 +1,6 @@
 package uz.pdp.AvtoTicket.service.permissionService;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import uz.pdp.AvtoTicket.dto.permission.CreatePermissionDTO;
 import uz.pdp.AvtoTicket.dto.permission.PermissionResponseDTO;
@@ -11,6 +10,7 @@ import uz.pdp.AvtoTicket.exceptions.IsDeletedException;
 import uz.pdp.AvtoTicket.exceptions.NotFoundException;
 import uz.pdp.AvtoTicket.mapper.PermissionMapper;
 import uz.pdp.AvtoTicket.repository.PermissionRepository;
+import uz.pdp.AvtoTicket.service.PermissionService;
 
 import java.util.HashSet;
 import java.util.List;

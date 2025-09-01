@@ -1,6 +1,6 @@
 package uz.pdp.AvtoTicket.dto.auth;
 
-public record SignUpDTO(
+public record RefreshTokenRequestDTO(
         String username,
         String email,
         String password) {

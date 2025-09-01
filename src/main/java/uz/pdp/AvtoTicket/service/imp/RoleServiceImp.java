@@ -11,7 +11,7 @@ import uz.pdp.AvtoTicket.exceptions.IsDeletedException;
 import uz.pdp.AvtoTicket.exceptions.NotFoundException;
 import uz.pdp.AvtoTicket.mapper.RoleMapper;
 import uz.pdp.AvtoTicket.repository.RoleRepository;
-import uz.pdp.AvtoTicket.service.permissionService.PermissionService;
+import uz.pdp.AvtoTicket.service.PermissionService;
 
 import java.util.List;
 import java.util.Set;
