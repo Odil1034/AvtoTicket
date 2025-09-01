@@ -31,14 +31,12 @@ public class RbacSeeder implements ApplicationRunner {
     }
 
     private void syncPermissions() {
-        Arrays.stream(PermissionType.values()).forEach(pt -> {
-            permissionRepository.findByAccess(pt.name())
-                    .orElseGet(() -> permissionRepository.save(
-                            Permission.builder()
-                                    .access(pt.name())
-                                    .build()
-                    ));
-        });
+        Arrays.stream(PermissionType.values()).forEach(pt -> permissionRepository.findByAccess(pt.name())
+                .orElseGet(() -> permissionRepository.save(
+                        Permission.builder()
+                                .access(pt.name())
+                                .build()
+                )));
     }
 
     private void syncRoles() {
