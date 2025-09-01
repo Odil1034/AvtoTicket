@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum PermissionTypes {
+public enum Permission {
     // USER:
     VIEW_OWN_PROFILE("VIEW_OWN_PROFILE"),
     EDIT_OWN_PROFILE("EDIT_OWN_PROFILE"),

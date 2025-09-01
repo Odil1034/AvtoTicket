@@ -26,7 +26,6 @@ public class SecurityConfig {
     private final AuthenticationEntryPoint authenticationEntryPoint;
     private final AuthenticationFilter authenticationFilter;
 
-
     String[] WHITE_LIST = {
             "/auth/login",
             "/auth/signup",

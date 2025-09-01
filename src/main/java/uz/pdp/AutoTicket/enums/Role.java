@@ -6,7 +6,7 @@ import uz.pdp.AutoTicket.utils.DescriptionConstants;
 
 import java.util.Set;
 
-import static uz.pdp.AutoTicket.enums.PermissionTypes.*;
+import static uz.pdp.AutoTicket.enums.Permission.*;
 
 /**
  * @author Baxriddinov Odiljon
@@ -15,7 +15,7 @@ import static uz.pdp.AutoTicket.enums.PermissionTypes.*;
 
 @Getter
 @AllArgsConstructor
-public enum RoleTypes {
+public enum Role {
 
     USER(DescriptionConstants.DESCRIPTION_USER,
             Set.of(VIEW_OWN_PROFILE,
@@ -58,5 +58,5 @@ public enum RoleTypes {
                     EMERGENCY_ACTIONS));
 
     private final String description;
-    private final Set<PermissionTypes> permissions;
+    private final Set<Permission> permissions;
 }
