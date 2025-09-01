@@ -20,4 +20,7 @@ public interface RoleRepository extends JpaRepository<Role, Long>, Repository {
 
     @Query(value = "SELECT r FROM Role r WHERE r.isDeleted = FALSE")
     List<Role> findAllCustom();
+
+    @Query(value = "SELECT r FROM Role r WHERE r.name = :name AND r.isDeleted = FALSE")
+    Optional<Role> findByName(String name);
 }

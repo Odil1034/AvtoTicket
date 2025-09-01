@@ -1,4 +1,4 @@
-package uz.pdp.AutoTicket.controller;
+package uz.pdp.AutoTicket.controller.superAdmin;
 
 import lombok.RequiredArgsConstructor;
 import uz.pdp.AutoTicket.dto.Response;

@@ -1,10 +1,7 @@
-package uz.pdp.AutoTicket.controller;
+package uz.pdp.AutoTicket.controller.superAdmin;
 
 import lombok.RequiredArgsConstructor;
-import uz.pdp.AutoTicket.dto.Response;
-import uz.pdp.AutoTicket.dto.role.RoleResponseDTO;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
