@@ -1,9 +1,8 @@
-package uz.pdp.AutoTicket.dto.permission;
+package uz.pdp.AutoTicket.dto.request;
 
 import uz.pdp.AutoTicket.dto.marker.Request;
 
 public record CreatePermissionDTO(
-        String name,
-        String description
+        String access
 ) implements Request {
 }

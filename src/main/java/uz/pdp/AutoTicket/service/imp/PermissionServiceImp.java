@@ -1,11 +1,12 @@
 package uz.pdp.AutoTicket.service.imp;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import uz.pdp.AutoTicket.dto.Response;
-import uz.pdp.AutoTicket.dto.permission.CreatePermissionDTO;
-import uz.pdp.AutoTicket.dto.permission.PermissionResponseDTO;
-import uz.pdp.AutoTicket.dto.permission.UpdatePermissionDTO;
+import uz.pdp.AutoTicket.dto.request.CreatePermissionDTO;
+import uz.pdp.AutoTicket.dto.request.UpdatePermissionDTO;
+import uz.pdp.AutoTicket.dto.response.PermissionResponseDTO;
 import uz.pdp.AutoTicket.entity.Permission;
 import uz.pdp.AutoTicket.mapper.PermissionMapper;
 import uz.pdp.AutoTicket.repository.PermissionRepository;
@@ -18,6 +19,8 @@ import java.util.Set;
 @Service
 public class PermissionServiceImp
         extends AbstractService<PermissionRepository, PermissionMapper> implements PermissionService {
+
+    @Lazy
     public PermissionServiceImp(PermissionRepository repository, PermissionMapper mapper) {
         super(repository, mapper);
     }

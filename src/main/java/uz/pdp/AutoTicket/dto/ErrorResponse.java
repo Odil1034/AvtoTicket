@@ -22,8 +22,7 @@ public record ErrorResponse(
         LocalDateTime timestamp
 ) implements Response {
 
-    public static ErrorResponse of(String code, String uri, String url,
-                                   String reason, String message) {
+    public static ErrorResponse of(String code, String uri, String url, String reason, String message) {
         return new ErrorResponse(
                 code,
                 uri,

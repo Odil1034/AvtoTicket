@@ -1,12 +1,13 @@
 package uz.pdp.AutoTicket.service.imp;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import uz.pdp.AutoTicket.dto.Response;
-import uz.pdp.AutoTicket.dto.role.CreateRoleDTO;
-import uz.pdp.AutoTicket.dto.role.RoleResponseDTO;
-import uz.pdp.AutoTicket.dto.role.UpdateRoleDTO;
+import uz.pdp.AutoTicket.dto.request.CreateRoleDTO;
+import uz.pdp.AutoTicket.dto.request.UpdateRoleDTO;
+import uz.pdp.AutoTicket.dto.response.RoleResponseDTO;
 import uz.pdp.AutoTicket.entity.Role;
 import uz.pdp.AutoTicket.exceptions.IsDeletedException;
 import uz.pdp.AutoTicket.mapper.RoleMapper;
@@ -24,6 +25,7 @@ public class RoleServiceImp extends AbstractService<RoleRepository, RoleMapper> 
 
     private final PermissionService permissionService;
 
+    @Lazy
     public RoleServiceImp(RoleRepository repository, RoleMapper mapper, PermissionService permissionService) {
         super(repository, mapper);
         this.permissionService = permissionService;

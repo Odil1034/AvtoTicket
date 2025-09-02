@@ -15,7 +15,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import uz.pdp.AutoTicket.filter.AuthenticationFilter;
+import uz.pdp.AutoTicket.config.filter.AuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor

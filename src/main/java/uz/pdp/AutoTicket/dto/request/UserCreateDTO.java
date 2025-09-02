@@ -1,4 +1,4 @@
-package uz.pdp.AutoTicket.dto.user;
+package uz.pdp.AutoTicket.dto.request;
 
 import java.time.LocalDate;
 

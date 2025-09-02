@@ -1,4 +1,4 @@
-package uz.pdp.AutoTicket.dto.auth;
+package uz.pdp.AutoTicket.dto.request.auth;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

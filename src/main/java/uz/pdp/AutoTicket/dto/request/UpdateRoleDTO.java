@@ -1,4 +1,4 @@
-package uz.pdp.AutoTicket.dto.role;
+package uz.pdp.AutoTicket.dto.request;
 
 import java.util.List;
 

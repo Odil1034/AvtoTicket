@@ -8,7 +8,8 @@ import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import uz.pdp.AutoTicket.dto.auth.TokenDTO;
+
+import uz.pdp.AutoTicket.dto.request.auth.TokenDTO;
 import uz.pdp.AutoTicket.entity.Role;
 import uz.pdp.AutoTicket.service.RoleService;
 

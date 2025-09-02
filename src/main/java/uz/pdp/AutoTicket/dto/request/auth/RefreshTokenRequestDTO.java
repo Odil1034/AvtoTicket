@@ -1,4 +1,4 @@
-package uz.pdp.AutoTicket.dto.auth;
+package uz.pdp.AutoTicket.dto.request.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;

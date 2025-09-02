@@ -20,6 +20,7 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "owner_id")
     private User owner;
 
+    @Builder.Default
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 

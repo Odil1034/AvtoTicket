@@ -1,10 +1,10 @@
 package uz.pdp.AutoTicket.service.imp;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import uz.pdp.AutoTicket.dto.Response;
-import uz.pdp.AutoTicket.dto.user.UserCreateDTO;
-import uz.pdp.AutoTicket.dto.user.UserResponseDTO;
-import uz.pdp.AutoTicket.dto.user.UserUpdateDTO;
+import uz.pdp.AutoTicket.dto.request.UserCreateDTO;
+import uz.pdp.AutoTicket.dto.request.UserUpdateDTO;
+import uz.pdp.AutoTicket.dto.response.UserResponseDTO;
 import uz.pdp.AutoTicket.entity.User;
 import uz.pdp.AutoTicket.mapper.UserMapper;
 import uz.pdp.AutoTicket.repository.UserRepository;
@@ -21,6 +21,7 @@ public class UserServiceImp extends AbstractService<UserRepository, UserMapper> 
 
     private final RoleService roleService;
 
+    @Lazy
     public UserServiceImp(UserRepository repository, UserMapper mapper, RoleService roleService) {
         super(repository, mapper);
         this.roleService = roleService;

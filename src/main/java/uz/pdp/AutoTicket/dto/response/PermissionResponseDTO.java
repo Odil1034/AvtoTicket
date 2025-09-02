@@ -1,4 +1,4 @@
-package uz.pdp.AutoTicket.dto.permission;
+package uz.pdp.AutoTicket.dto.response;
 
 import uz.pdp.AutoTicket.dto.marker.Response;
 

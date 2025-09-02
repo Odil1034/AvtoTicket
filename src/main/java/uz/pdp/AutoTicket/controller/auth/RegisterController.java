@@ -3,10 +3,10 @@ package uz.pdp.AutoTicket.controller.auth;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import uz.pdp.AutoTicket.dto.Response;
-import uz.pdp.AutoTicket.dto.auth.TokenRequestDTO;
-import uz.pdp.AutoTicket.dto.auth.TokenResponseDTO;
-import uz.pdp.AutoTicket.dto.user.UserCreateDTO;
-import uz.pdp.AutoTicket.dto.user.UserResponseDTO;
+import uz.pdp.AutoTicket.dto.request.UserCreateDTO;
+import uz.pdp.AutoTicket.dto.request.auth.TokenRequestDTO;
+import uz.pdp.AutoTicket.dto.request.auth.TokenResponseDTO;
+import uz.pdp.AutoTicket.dto.response.UserResponseDTO;
 import uz.pdp.AutoTicket.service.UserService;
 import uz.pdp.AutoTicket.service.token.TokenService;
 
