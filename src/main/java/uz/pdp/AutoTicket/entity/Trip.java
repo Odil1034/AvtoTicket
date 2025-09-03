@@ -19,9 +19,9 @@ public class Trip extends BaseEntity {
     @JoinColumn(name = "route_id", nullable = false)
     private Route route;
 
-    private LocalDateTime departure;
+    private LocalDateTime departure;  // Ketish
 
-    private LocalDateTime arrival;
+    private LocalDateTime arrival;      // Kelish
 
     @Column(name = "count_of_seats", nullable = false)
     private Integer countOfSeats;
@@ -29,9 +29,13 @@ public class Trip extends BaseEntity {
     @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "trip_status")
-    private TripStatus isActive = TripStatus.STARTED;
+    private TripStatus tripStatus = TripStatus.STARTED;
 
     @Column(nullable = false)
     private Double price;
+
+    @ManyToOne
+    @JoinColumn(name = "bus_id", nullable = false)
+    private Bus bus;
 
 }

@@ -4,6 +4,7 @@ import uz.pdp.AutoTicket.dto.request.CreateSeatDTO;
 import uz.pdp.AutoTicket.dto.request.UpdateSeatDTO;
 import uz.pdp.AutoTicket.dto.response.SeatResponseDTO;
 import uz.pdp.AutoTicket.entity.Seat;
+import uz.pdp.AutoTicket.service.markers.GenericCruidService;
 
 /**
  * @author Baxriddinov Odiljon

@@ -6,6 +6,7 @@ import uz.pdp.AutoTicket.dto.request.UserCreateDTO;
 import uz.pdp.AutoTicket.dto.request.UserUpdateDTO;
 import uz.pdp.AutoTicket.dto.response.UserResponseDTO;
 import uz.pdp.AutoTicket.entity.User;
+import uz.pdp.AutoTicket.service.markers.GenericCruidService;
 
 public interface UserService
         extends GenericCruidService<Long, User, UserResponseDTO, UserCreateDTO, UserUpdateDTO> {

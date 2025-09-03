@@ -1,4 +1,4 @@
-package uz.pdp.AutoTicket.service;
+package uz.pdp.AutoTicket.service.markers;
 
 import jakarta.validation.constraints.NotNull;
 import uz.pdp.AutoTicket.dto.Response;
@@ -17,7 +17,7 @@ public interface GenericCruidService<
         R extends uz.pdp.AutoTicket.dto.marker.Response,
         CR extends Request,
         UP extends Request>
-        extends GenericQueryService<ID, E, R> {
+        extends GenericQueryService<ID, E, R>, GenericService {
 
     Response<R> create(@NotNull CR dto);
 

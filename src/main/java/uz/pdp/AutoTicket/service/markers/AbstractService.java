@@ -1,4 +1,4 @@
-package uz.pdp.AutoTicket.service;
+package uz.pdp.AutoTicket.service.markers;
 
 import lombok.RequiredArgsConstructor;
 import uz.pdp.AutoTicket.mapper.Mapper;

@@ -6,6 +6,7 @@ import uz.pdp.AutoTicket.dto.request.CreateRoleDTO;
 import uz.pdp.AutoTicket.dto.request.UpdateRoleDTO;
 import uz.pdp.AutoTicket.dto.response.RoleResponseDTO;
 import uz.pdp.AutoTicket.entity.Role;
+import uz.pdp.AutoTicket.service.markers.GenericCruidService;
 
 import java.util.Set;
 

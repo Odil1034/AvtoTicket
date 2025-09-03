@@ -10,7 +10,7 @@ import uz.pdp.AutoTicket.dto.response.PermissionResponseDTO;
 import uz.pdp.AutoTicket.entity.Permission;
 import uz.pdp.AutoTicket.mapper.PermissionMapper;
 import uz.pdp.AutoTicket.repository.PermissionRepository;
-import uz.pdp.AutoTicket.service.AbstractService;
+import uz.pdp.AutoTicket.service.markers.AbstractService;
 import uz.pdp.AutoTicket.service.PermissionService;
 
 import java.util.List;

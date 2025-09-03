@@ -1,10 +1,11 @@
-package uz.pdp.AutoTicket.dto.response;
+package uz.pdp.AutoTicket.dto.response.ticket;
 
 import java.time.LocalDateTime;
 
 import uz.pdp.AutoTicket.dto.marker.Response;
+import uz.pdp.AutoTicket.dto.response.RouteResponseDTO;
 
-public record TicketResponseDTO(
+public record TicketDetailsDTO(
         Long id,
         String passengerName,
         LocalDateTime bookingTime,

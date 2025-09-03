@@ -1,6 +1,7 @@
 package uz.pdp.AutoTicket.dto.response;
 
 import uz.pdp.AutoTicket.dto.marker.Response;
+import uz.pdp.AutoTicket.dto.response.ticket.TicketResponseDTO;
 import uz.pdp.AutoTicket.enums.PaymentStatus;
 
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ public record OrderResponseDTO(
         Double totalPrice,
         LocalDateTime createdAt,
         LocalDateTime updatedAt,
-        List<TicketListDTO> tickets
+        List<TicketResponseDTO> tickets
 ) implements Response {
 
 }

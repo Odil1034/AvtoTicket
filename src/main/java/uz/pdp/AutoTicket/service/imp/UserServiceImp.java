@@ -8,7 +8,7 @@ import uz.pdp.AutoTicket.dto.response.UserResponseDTO;
 import uz.pdp.AutoTicket.entity.User;
 import uz.pdp.AutoTicket.mapper.UserMapper;
 import uz.pdp.AutoTicket.repository.UserRepository;
-import uz.pdp.AutoTicket.service.AbstractService;
+import uz.pdp.AutoTicket.service.markers.AbstractService;
 import uz.pdp.AutoTicket.service.RoleService;
 import uz.pdp.AutoTicket.service.UserService;
 

@@ -12,7 +12,7 @@ import uz.pdp.AutoTicket.entity.Role;
 import uz.pdp.AutoTicket.exceptions.IsDeletedException;
 import uz.pdp.AutoTicket.mapper.RoleMapper;
 import uz.pdp.AutoTicket.repository.RoleRepository;
-import uz.pdp.AutoTicket.service.AbstractService;
+import uz.pdp.AutoTicket.service.markers.AbstractService;
 import uz.pdp.AutoTicket.service.PermissionService;
 import uz.pdp.AutoTicket.service.RoleService;
 

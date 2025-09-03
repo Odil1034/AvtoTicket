@@ -1,4 +1,4 @@
-package uz.pdp.AutoTicket.service;
+package uz.pdp.AutoTicket.service.markers;
 
 /**
  * @author Baxriddinov Odiljon

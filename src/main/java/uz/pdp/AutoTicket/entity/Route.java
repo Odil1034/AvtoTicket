@@ -1,6 +1,7 @@
 package uz.pdp.AutoTicket.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalTime;
@@ -13,6 +14,9 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "routes")
 public class Route extends BaseEntity {
+
+    @Column(nullable = false, unique = true)
+    private String name;
 
     @OneToOne
     @JoinColumn(name = "from_address_id")

@@ -7,9 +7,10 @@ import uz.pdp.AutoTicket.dto.request.CreatePermissionDTO;
 import uz.pdp.AutoTicket.dto.request.UpdatePermissionDTO;
 import uz.pdp.AutoTicket.dto.response.PermissionResponseDTO;
 import uz.pdp.AutoTicket.entity.Permission;
+import uz.pdp.AutoTicket.service.markers.GenericCruidService;
 
 public interface PermissionService extends GenericCruidService
-        <Long, Permission, PermissionResponseDTO, CreatePermissionDTO, UpdatePermissionDTO>{
+        <Long, Permission, PermissionResponseDTO, CreatePermissionDTO, UpdatePermissionDTO> {
 
     Set<Permission> findAllByIds(List<Long> longs);
 }

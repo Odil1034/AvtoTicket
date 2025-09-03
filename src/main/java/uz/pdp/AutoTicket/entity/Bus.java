@@ -43,6 +43,9 @@ public class Bus extends BaseEntity {
     private String plateNumber;  //  10 A321AA UZ
 
     @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Seat> seats;
+    private List<Seat> totalSeats;
+
+    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Trip> trips;
 
 }
