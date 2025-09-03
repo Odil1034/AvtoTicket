@@ -45,9 +45,9 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Gender gender = Gender.UNKNOWN;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "profile_images")
-    private Document profileImage;
+    private List<Document> profileImage;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Bus> buses;

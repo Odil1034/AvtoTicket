@@ -23,8 +23,6 @@ import java.util.function.Function;
  * @author Baxriddinov Odiljon
  * @since 31/08/2025 16:54
  */
-
-
 @Component
 public class JwtTokenUtil {
 
@@ -111,7 +109,6 @@ public class JwtTokenUtil {
         } catch (Exception e) {
             return true;
         }
-
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

@@ -38,4 +38,8 @@ public class Ticket extends BaseEntity {
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
+    @Builder.Default
+    @Column(name = "is_paid")
+    private boolean isPaid = false;
+
 }

@@ -36,4 +36,12 @@ public class Document extends BaseEntity {
             this.generatedName = UUID.randomUUID().toString();
         }
     }
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "bus_id")
+    private Bus bus;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner_id")
+    private User owner;
 }

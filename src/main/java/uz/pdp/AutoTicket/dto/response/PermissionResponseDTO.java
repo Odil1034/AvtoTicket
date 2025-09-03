@@ -4,8 +4,7 @@ import uz.pdp.AutoTicket.dto.marker.Response;
 
 public record PermissionResponseDTO(
         Long id,
-        String name,
-        String description
+        String name
 ) implements Response {
 
 }

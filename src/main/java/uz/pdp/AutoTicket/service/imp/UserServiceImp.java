@@ -4,7 +4,8 @@ import org.springframework.context.annotation.Lazy;
 import uz.pdp.AutoTicket.dto.Response;
 import uz.pdp.AutoTicket.dto.request.UserCreateDTO;
 import uz.pdp.AutoTicket.dto.request.UserUpdateDTO;
-import uz.pdp.AutoTicket.dto.response.UserResponseDTO;
+import uz.pdp.AutoTicket.dto.response.OrderResponseDTO;
+import uz.pdp.AutoTicket.dto.response.user.UserResponseDTO;
 import uz.pdp.AutoTicket.entity.User;
 import uz.pdp.AutoTicket.mapper.UserMapper;
 import uz.pdp.AutoTicket.repository.UserRepository;
@@ -34,6 +35,26 @@ public class UserServiceImp extends AbstractService<UserRepository, UserMapper> 
 
     @Override
     public Response<UserResponseDTO> findMe() {
+        return null;
+    }
+
+    @Override
+    public Response<UserResponseDTO> registerUser(UserCreateDTO dto) {
+        return null;
+    }
+
+    @Override
+    public Response<UserResponseDTO> updateProfile(UserUpdateDTO dto) {
+        return null;
+    }
+
+    @Override
+    public Response<Boolean> changePassword(Long userId, String oldPass, String newPass) {
+        return null;
+    }
+
+    @Override
+    public Response<List<OrderResponseDTO>> getBookingHistory(Long userId) {
         return null;
     }
 

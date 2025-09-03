@@ -51,7 +51,12 @@ public class PermissionServiceImp
     }
 
     @Override
-    public Set<Permission> findAllByIds(List<Long> longs) {
-        return Set.of();
+    public Response<Boolean> hasPermission(Long userId, String permission) {
+        return null;
+    }
+
+    @Override
+    public Response<List<PermissionResponseDTO>> getUserPermissions(Long userId) {
+        return null;
     }
 }

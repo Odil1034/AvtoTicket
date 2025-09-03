@@ -13,5 +13,6 @@ import java.util.Set;
 @Service
 public interface RoleService
         extends GenericCruidService<Long, Role, RoleResponseDTO, CreateRoleDTO, UpdateRoleDTO> {
+
     String getRoleStr(Set<Role> roles);
 }

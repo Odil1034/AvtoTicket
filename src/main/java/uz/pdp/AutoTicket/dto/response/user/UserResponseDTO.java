@@ -1,4 +1,4 @@
-package uz.pdp.AutoTicket.dto.response;
+package uz.pdp.AutoTicket.dto.response.user;
 
 import java.util.List;
 

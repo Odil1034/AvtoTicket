@@ -30,7 +30,7 @@ public class Bus extends BaseEntity {
     @Column(name = "standing_capacity")
     private Integer standingCapacity;
 
-    @OneToMany
+    @OneToMany(mappedBy = "bus", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Document> documents;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

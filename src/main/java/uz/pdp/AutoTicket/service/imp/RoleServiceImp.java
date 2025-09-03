@@ -8,6 +8,8 @@ import uz.pdp.AutoTicket.dto.Response;
 import uz.pdp.AutoTicket.dto.request.CreateRoleDTO;
 import uz.pdp.AutoTicket.dto.request.UpdateRoleDTO;
 import uz.pdp.AutoTicket.dto.response.RoleResponseDTO;
+import uz.pdp.AutoTicket.dto.response.user.BlockUserDTO;
+import uz.pdp.AutoTicket.dto.response.user.UserRolesDTO;
 import uz.pdp.AutoTicket.entity.Role;
 import uz.pdp.AutoTicket.exceptions.IsDeletedException;
 import uz.pdp.AutoTicket.mapper.RoleMapper;
@@ -73,5 +75,6 @@ public class RoleServiceImp extends AbstractService<RoleRepository, RoleMapper> 
         }
         return joiner.toString();
     }
+
 }
 

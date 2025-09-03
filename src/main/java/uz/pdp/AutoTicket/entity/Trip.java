@@ -31,6 +31,7 @@ public class Trip extends BaseEntity {
     @Column(name = "count_of_seats", nullable = false)
     private Integer countOfSeats;    // umumiy o‘rindiqlar soni
 
+    @Column(name = "empty_seats")
     private Integer emptySeats;   // bo‘sh o‘rindiqlar soni
 
     @Builder.Default
