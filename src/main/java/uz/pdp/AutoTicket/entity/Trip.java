@@ -5,6 +5,7 @@ import lombok.*;
 import uz.pdp.AutoTicket.enums.TripStatus;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,8 +24,14 @@ public class Trip extends BaseEntity {
 
     private LocalDateTime arrival;      // Kelish
 
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "seats")
+    private List<Seat> seats;
+
     @Column(name = "count_of_seats", nullable = false)
-    private Integer countOfSeats;
+    private Integer countOfSeats;    // umumiy o‘rindiqlar soni
+
+    private Integer emptySeats;   // bo‘sh o‘rindiqlar soni
 
     @Builder.Default
     @Enumerated(EnumType.STRING)

@@ -10,5 +10,4 @@ import uz.pdp.AutoTicket.entity.Permission;
 @Mapper(componentModel = "spring")
 public interface PermissionMapper
         extends GenericMapper<Permission, PermissionResponseDTO, CreatePermissionDTO, UpdatePermissionDTO> {
-
 }

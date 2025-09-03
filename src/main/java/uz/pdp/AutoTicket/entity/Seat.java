@@ -27,4 +27,8 @@ public class Seat extends BaseEntity {
     @JoinColumn(name = "bus_id", nullable = false)
     private Bus bus;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trip_id")
+    private Trip trip;
+
 }

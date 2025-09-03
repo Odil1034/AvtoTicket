@@ -1,6 +1,7 @@
 package uz.pdp.AutoTicket.service;
 
 import uz.pdp.AutoTicket.dto.request.CreateTripDTO;
+import uz.pdp.AutoTicket.dto.request.UpdateTripDTO;
 import uz.pdp.AutoTicket.dto.response.TripResponseDTO;
 import uz.pdp.AutoTicket.entity.Trip;
 import uz.pdp.AutoTicket.service.markers.GenericCruidService;
