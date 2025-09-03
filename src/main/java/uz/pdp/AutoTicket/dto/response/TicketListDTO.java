@@ -1,19 +1,20 @@
 package uz.pdp.AutoTicket.dto.response;
 
-import java.time.LocalDateTime;
-
 import uz.pdp.AutoTicket.dto.marker.Response;
 
-public record TicketResponseDTO(
+import java.time.LocalDateTime;
+
+/**
+ * @author Baxriddinov Odiljon
+ * @since 03/09/2025 13:00
+ */
+public record TicketListDTO(
         Long id,
         String passengerName,
         LocalDateTime bookingTime,
         Double price,
         Long tripId,
         RouteResponseDTO route,
-        Integer seatNumber,
-        Long ownerId,
-        Long orderId
+        int seatNumber
 ) implements Response {
-
 }

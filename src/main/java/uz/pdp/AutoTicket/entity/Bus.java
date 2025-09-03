@@ -3,7 +3,6 @@ package uz.pdp.AutoTicket.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import uz.pdp.AutoTicket.enums.FuelType;
-import uz.pdp.AutoTicket.enums.ModelType;
 
 import java.util.List;
 
@@ -16,11 +15,9 @@ import java.util.List;
 @Table(name = "buses")
 public class Bus extends BaseEntity {
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "model_name", nullable = false)
-    private ModelType modelName;
-
-    private String manufacturer;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "bus_model_id", nullable = false)
+    private BusModel model;
 
     @Column(name = "count_of_seats", nullable = false)
     private Integer countOfSeats;

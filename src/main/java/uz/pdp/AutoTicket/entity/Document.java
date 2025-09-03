@@ -24,6 +24,9 @@ public class Document extends BaseEntity {
 
     private String extension;  // .jpg
 
+    @Column(nullable = false)
+    private Double size;
+
     @Column(name = "generated_name", unique = true, updatable = false, nullable = false)
     private String generatedName;  // fdasferefdasfe321ir34214g
 
