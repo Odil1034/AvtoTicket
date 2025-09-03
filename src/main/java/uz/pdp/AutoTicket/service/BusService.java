@@ -7,6 +7,7 @@ import uz.pdp.AutoTicket.dto.response.SeatResponseDTO;
 import uz.pdp.AutoTicket.dto.response.TripResponseDTO;
 import uz.pdp.AutoTicket.dto.response.bus.BusResponseDTO;
 import uz.pdp.AutoTicket.entity.Bus;
+import uz.pdp.AutoTicket.enums.BusStatus;
 import uz.pdp.AutoTicket.service.markers.GenericCruidService;
 
 import java.time.LocalDate;
@@ -29,5 +30,8 @@ public interface BusService extends GenericCruidService<Long, Bus, BusResponseDT
 
     // bo‘sh o‘rinlarni ko‘rish.
     Response<List<SeatResponseDTO>> getAvailableSeats(Long busId, LocalDate date);
+
+    // Bus statusini yangilash (availability/maintenance)
+    Response<Boolean> updateBusModelStatus(Long modelId, BusStatus status);
 
 }

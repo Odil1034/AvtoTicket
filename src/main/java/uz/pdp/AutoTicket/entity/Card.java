@@ -2,6 +2,7 @@ package uz.pdp.AutoTicket.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import uz.pdp.AutoTicket.enums.CardStatus;
 
 @Getter
 @Setter
@@ -27,5 +28,7 @@ public class Card extends BaseEntity {
 
     @Column(name = "expired_date")
     private String expiredDate;
+
+    private CardStatus status;
 
 }

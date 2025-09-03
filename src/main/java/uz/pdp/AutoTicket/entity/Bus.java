@@ -2,6 +2,7 @@ package uz.pdp.AutoTicket.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import uz.pdp.AutoTicket.enums.BusStatus;
 import uz.pdp.AutoTicket.enums.FuelType;
 
 import java.util.List;
@@ -38,6 +39,10 @@ public class Bus extends BaseEntity {
     private User owner;
 
     private String description;
+
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    private BusStatus status = BusStatus.AVAILABILITY;
 
     @Column(name = "plate_number", unique = true, nullable = false)
     private String plateNumber;  //  10 A321AA UZ

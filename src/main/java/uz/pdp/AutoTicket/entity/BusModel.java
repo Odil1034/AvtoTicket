@@ -2,6 +2,7 @@ package uz.pdp.AutoTicket.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import uz.pdp.AutoTicket.enums.BusModelStatus;
 import uz.pdp.AutoTicket.enums.Manufacturer;
 
 import java.util.List;
@@ -22,5 +23,10 @@ public class BusModel extends BaseEntity {
 
     @OneToMany(mappedBy = "model", fetch = FetchType.LAZY)
     private List<Bus> buses;
+
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private BusModelStatus status = BusModelStatus.ACTIVE;
 
 }

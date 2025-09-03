@@ -28,4 +28,18 @@ public interface RouteService
 
     // marshrut vaqtini hisoblash.
     Response<LocalTime> calculateTravelTime(Long routeId);
+
+    // Marshrutga bir nechta buslar biriktirish (batch)
+    Response<RouteResponseDTO> assignBusesToRoute(Long routeId, List<Long> busIds);
+
+    // Bu marshrutga nechta trip rejalashtirilgan
+    Response<Integer> getTripCountByRoute(Long routeId);
+
+    // ACTIVE / INACTIVE / CANCELLED
+    Response<Boolean> updateRouteStatus(Long routeId, String status);
+
+    // Belgilangan sanadagi vaqti bo‘yicha triplar
+    Response<List<RouteResponseDTO>> getRoutesByDateAndTime(LocalDate date, LocalTime time);
+
+    Response<Boolean> cancelRoute(Long routeId);
 }

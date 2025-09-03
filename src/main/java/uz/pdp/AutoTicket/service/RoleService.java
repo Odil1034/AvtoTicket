@@ -2,6 +2,7 @@ package uz.pdp.AutoTicket.service;
 
 import org.springframework.stereotype.Service;
 
+import uz.pdp.AutoTicket.dto.Response;
 import uz.pdp.AutoTicket.dto.request.CreateRoleDTO;
 import uz.pdp.AutoTicket.dto.request.UpdateRoleDTO;
 import uz.pdp.AutoTicket.dto.response.RoleResponseDTO;
@@ -15,4 +16,13 @@ public interface RoleService
         extends GenericCruidService<Long, Role, RoleResponseDTO, CreateRoleDTO, UpdateRoleDTO> {
 
     String getRoleStr(Set<Role> roles);
+
+    // Role nomi bo‘yicha qidirish
+    Response<RoleResponseDTO> getRoleByName(String roleName);
+
+    // Role setidan ma’lum permissionni tekshirish
+    Response<Boolean> hasPermission(Set<Role> roles, String permission);
+
+    // Foydalanuvchi ma’lum rolega ega ekanligini tekshirish
+    Response<Boolean> isUserInRole(Long userId, String roleName);
 }
