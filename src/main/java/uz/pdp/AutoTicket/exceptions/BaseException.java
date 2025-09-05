@@ -2,6 +2,7 @@ package uz.pdp.AutoTicket.exceptions;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+import uz.pdp.AutoTicket.utils.ErrorCode;
 
 import java.io.Serial;
 import java.text.MessageFormat;

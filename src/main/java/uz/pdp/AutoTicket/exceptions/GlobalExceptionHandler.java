@@ -12,18 +12,17 @@ import java.time.LocalDateTime;
  * @author Baxriddinov Odiljon
  * @since 31/08/2025 17:48
  */
-
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BaseException.class)
-    public ErrorResponse notFoundException(HttpServletRequest req, ResourceNotFoundException exception) {
+    public ErrorResponse notFoundException(HttpServletRequest req, BaseException ex) {
         return new ErrorResponse(
-                String.valueOf(exception.getStatus().value()),
+                String.valueOf(ex.getHttpStatus().value()),
                 req.getRequestURI(),
                 req.getRequestURL().toString(),
-                exception.getCause().toString(),
-                exception.getMessage(),
+                ex.getCause().toString(),
+                ex.getMessage(),
                 LocalDateTime.now()
         );
     }

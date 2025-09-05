@@ -9,4 +9,5 @@ public interface ErrorCode {
     String USER_ALREADY_EXIST = "USER_ALREADY_EXIST";
     String RESOURCE_NOT_FOUND = "RESOURCE_NOT_FOUND";
     String TOKEN_EXPIRED = "TOKEN_EXPIRED";
+    String WRONG_PASSWORD = "WRONG_PASSWORD";
 }

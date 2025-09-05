@@ -3,14 +3,13 @@ package uz.pdp.AutoTicket.exceptions;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import uz.pdp.AutoTicket.utils.ErrorCode;
 
 @Getter
 @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "Data is deleted")
-public class ResourceNotFoundException extends RuntimeException {
+public class ResourceNotFoundException extends BaseException {
 
-    private final HttpStatus status = HttpStatus.NOT_FOUND;
-
-    public ResourceNotFoundException(String message) {
-        super(message);
+    public ResourceNotFoundException(String message, Object... args) {
+        super(HttpStatus.NO_CONTENT, ErrorCode.RESOURCE_NOT_FOUND, message, args);
     }
 }
