@@ -7,7 +7,7 @@ import uz.pdp.AutoTicket.dto.request.UpdateRoleDTO;
 import uz.pdp.AutoTicket.dto.response.RoleResponseDTO;
 import uz.pdp.AutoTicket.entity.Role;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = PermissionMapper.class)
 public interface RoleMapper
         extends GenericMapper<Role, RoleResponseDTO, CreateRoleDTO, UpdateRoleDTO> {
 

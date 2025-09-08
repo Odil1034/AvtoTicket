@@ -7,7 +7,7 @@ package uz.pdp.AutoTicket.utils;
 public interface Constants {
 
     String AUTH_TYPE = "Bearer ";
-    String AUTH_HEADER = "Authentication ";
+    String AUTH_HEADER = "Authorization";
     String BASE_PATH = "/autoticket/";
 
 }

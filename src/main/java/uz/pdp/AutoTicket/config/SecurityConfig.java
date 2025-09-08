@@ -9,12 +9,16 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import uz.pdp.AutoTicket.config.filter.AuthenticationFilter;
 
 @Configuration
@@ -25,23 +29,29 @@ public class SecurityConfig {
     private final AccessDeniedHandler accessDeniedHandler;
     private final AuthenticationEntryPoint authenticationEntryPoint;
     private final AuthenticationFilter authenticationFilter;
+    private final CorsProperty corsProperty;
+    private final CorsConfigurationSource corsConfigurationSource;
+
 
     String[] WHITE_LIST = {
-            "/auth/login",
-            "/auth/signup",
-            "/user/**",
             "/swagger-ui.html",
             "/swagger-ui/**",
-            "/api-docs"
+            "/api-docs/**",
+            "/swagger-resources/**",
+            "/webjars/**",
+            "/autoticket/auth/**",
+            "/autoticket/user/**"
     };
 
     @Bean
     @Lazy
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.cors(cors -> cors.configurationSource(corsConfigurationSource));
         http.authorizeHttpRequests(
                 auth -> {
-                    auth.requestMatchers("/**").authenticated();
                     auth.requestMatchers(WHITE_LIST).permitAll();
+                    auth.requestMatchers("/**").authenticated();
                 }
         );
         http.exceptionHandling((handler) -> {
@@ -52,6 +62,18 @@ public class SecurityConfig {
         http.authenticationManager(authenticationManager());
         http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedHeaders(corsProperty.getAllowedHeaders());
+        corsConfiguration.setAllowedMethods(corsProperty.getAllowedMethods());
+        corsConfiguration.setAllowedOriginPatterns(corsProperty.getAllowedOrigins());
+        corsConfiguration.setAllowCredentials(corsProperty.isAllowCredentials());
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration(corsProperty.getUrlPattern(), corsConfiguration);
+        return source;
     }
 
     @Bean

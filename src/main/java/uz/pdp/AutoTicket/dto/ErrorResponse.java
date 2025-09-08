@@ -19,8 +19,8 @@ public record ErrorResponse(
         String url,
         String reason,
         String message,
-        LocalDateTime timestamp
-) implements Response {
+        LocalDateTime timestamp)
+        implements Response {
 
     public static ErrorResponse of(String code, String uri, String url, String reason, String message) {
         return new ErrorResponse(

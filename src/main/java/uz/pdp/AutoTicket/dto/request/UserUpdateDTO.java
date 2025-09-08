@@ -2,23 +2,19 @@ package uz.pdp.AutoTicket.dto.request;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import uz.pdp.AutoTicket.dto.marker.Request;
+import uz.pdp.AutoTicket.enums.Gender;
 
 public record UserUpdateDTO(
-        String username,
-        String password,
-        String firstName,
-        String lastName,
-        LocalDate dateOfBirth,
-        String passportNumber,
-        String email,
-        String phoneNumber,
-        String gender
-//        Documents profileImage,
-//        List<Bus>buses
-//        List<Order>orders
-//        List<Ticket>tickets
-//        List<Card>cards
-//        Set<Role>roles
+        @NotNull @NotBlank String username,
+        @NotNull @NotBlank String firstName,
+        @NotNull @NotBlank String lastName,
+        @NotNull LocalDate dateOfBirth,
+        @NotNull @NotBlank String passportNumber,
+        @NotNull @NotBlank String email,
+        @NotNull @NotBlank String phoneNumber,
+        Gender gender
 ) implements Request {
 }

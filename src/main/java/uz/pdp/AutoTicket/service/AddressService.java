@@ -1,10 +1,10 @@
 package uz.pdp.AutoTicket.service;
 
+import jakarta.validation.Valid;
 import uz.pdp.AutoTicket.dto.Response;
 import uz.pdp.AutoTicket.dto.request.CreateAddressDTO;
 import uz.pdp.AutoTicket.dto.request.UpdateAddressDTO;
 import uz.pdp.AutoTicket.dto.response.AddressResponseDTO;
-import uz.pdp.AutoTicket.entity.Address;
 import uz.pdp.AutoTicket.service.markers.GenericCruidService;
 
 import java.util.List;
@@ -29,4 +29,6 @@ public interface AddressService extends
 
     // Default addressni olish
     Response<AddressResponseDTO> getDefaultAddress(Long userId);
+
+    Response<List<AddressResponseDTO>> createAll(@Valid List<CreateAddressDTO> dto);
 }

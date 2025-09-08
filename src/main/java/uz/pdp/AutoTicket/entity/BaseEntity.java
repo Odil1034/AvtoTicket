@@ -25,7 +25,7 @@ public abstract class BaseEntity {
     private Long id;
 
     @CreatedBy
-    private String createdBy;
+    private Long createdBy;
 
     @CreatedDate
     private LocalDateTime createdAt;

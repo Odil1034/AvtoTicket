@@ -17,9 +17,6 @@ import java.util.List;
  */
 public interface RouteService
         extends GenericCruidService<Long, Route, RouteResponseDTO, CreateRouteDTO, UpdateRouteDTO> {
-    // yangi marshrut qo‘shish.
-    Response<RouteResponseDTO> createRoute(CreateRouteDTO dto);
-
     // marshrutlarni qidirish.
     Response<List<RouteResponseDTO>> getAvailableRoutes(String from, String to, LocalDate date);
 

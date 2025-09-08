@@ -7,10 +7,8 @@ import uz.pdp.AutoTicket.dto.request.UserUpdateDTO;
 import uz.pdp.AutoTicket.dto.response.user.UserResponseDTO;
 import uz.pdp.AutoTicket.entity.User;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = RoleMapper.class)
 public interface UserMapper
         extends GenericMapper<User, UserResponseDTO, UserCreateDTO, UserUpdateDTO> {
-
-//    CustomUserDetails toCustomUserDetails(User user);
 
 }

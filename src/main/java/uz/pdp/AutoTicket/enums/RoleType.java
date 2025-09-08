@@ -33,19 +33,19 @@ public enum RoleType {
                     REVIEW_TRIPS)),
 
     PASSENGER(DescriptionConstants.DESCRIPTION_PASSENGER,
-            unionOf(USER),
+//            unionOf(USER),
             Set.of(VIEW_AVAILABLE_TRIPS,
                     VIEW_PERSONAL_TICKET_HISTORY,
                     RECEIVE_NOTIFICATION_ABOUT_TRIPS)),
     DRIVER(DescriptionConstants.DESCRIPTION_DRIVER,
-            unionOf(USER),
+//            unionOf(USER),
             Set.of(VIEW_ASSIGNED_TRIPS,
                     UPDATE_TRIP_STATUS,
                     VIEW_PASSENGER_LIST_FOR_ASSIGNED_TRIPS,
                     UPDATE_BUS_STATUS,
                     COMMUNICATE_WITH_PASSENGERS)),
     ADMIN(DescriptionConstants.DESCRIPTION_ADMIN,
-            unionOf(USER, PASSENGER, DRIVER),
+//            unionOf(USER, PASSENGER, DRIVER),
             Set.of(
                     MANAGE_USERS, // create, update, deactivate_accounts
                     MANAGE_DRIVERS, // create, update, deactivate_accounts,

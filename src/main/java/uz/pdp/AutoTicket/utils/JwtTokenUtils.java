@@ -2,7 +2,9 @@ package uz.pdp.AutoTicket.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +16,7 @@ import uz.pdp.AutoTicket.entity.Role;
 import uz.pdp.AutoTicket.service.RoleService;
 
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -24,7 +27,7 @@ import java.util.function.Function;
  * @since 31/08/2025 16:54
  */
 @Component
-public class JwtTokenUtil {
+public class JwtTokenUtils {
 
     private final RoleService roleService;
 
@@ -37,7 +40,7 @@ public class JwtTokenUtil {
     @Value("${token.expiration.refresh}")
     private long REFRESH_TOKEN_EXPIRATION;
 
-    public JwtTokenUtil(RoleService roleService) {
+    public JwtTokenUtils(RoleService roleService) {
         this.roleService = roleService;
     }
 
@@ -49,13 +52,13 @@ public class JwtTokenUtil {
         map.put("roles", rolesStr);
 
         LocalDateTime issuedAt = LocalDateTime.now();
-        LocalDateTime expiredAt = issuedAt.minusSeconds(ACCESS_TOKEN_EXPIRATION / 1000);
+        LocalDateTime expiredAt = issuedAt.plusSeconds(ACCESS_TOKEN_EXPIRATION / 1000);
         String token = Jwts.builder()
                 .subject(username)
                 .claims(map)
                 .issuedAt(Date.from(issuedAt.atZone(ZoneId.systemDefault()).toInstant()))
                 .expiration(Date.from(expiredAt.atZone(ZoneId.systemDefault()).toInstant()))
-                .signWith(getSignKey())
+                .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
         System.out.println(token);
 
@@ -64,12 +67,12 @@ public class JwtTokenUtil {
 
     public TokenDTO generateRefreshToken(@NonNull String username) {
         LocalDateTime issuedAt = LocalDateTime.now();
-        LocalDateTime expiredAt = issuedAt.minusSeconds(REFRESH_TOKEN_EXPIRATION / 1000);
+        LocalDateTime expiredAt = issuedAt.plusSeconds(REFRESH_TOKEN_EXPIRATION / 1000);
         String token = Jwts.builder()
                 .subject(username)
                 .issuedAt(Date.from(issuedAt.atZone(ZoneId.systemDefault()).toInstant()))
                 .expiration(Date.from(expiredAt.atZone(ZoneId.systemDefault()).toInstant()))
-                .signWith(getSignKey())
+                .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
         System.out.println(token);
 
@@ -84,15 +87,11 @@ public class JwtTokenUtil {
                 .getPayload();
     }
 
-    private SecretKey getSignKey() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_KEY));
-    }
-
     private Long extractId(String token) {
         return extractAllClaims(token).get("id", Long.class);
     }
 
-    private boolean validateToken(String token, UserDetails userDetails) {
+    public boolean validateToken(String token, UserDetails userDetails) {
         String username = extractUsername(token);
         return userDetails.getUsername().equals(username) && !isTokenExpired(token);
     }
@@ -102,7 +101,7 @@ public class JwtTokenUtil {
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    private boolean isTokenExpired(String token) {
+    public boolean isTokenExpired(String token) {
         try {
             final Date expiration = extractClaim(token, Claims::getExpiration);
             return expiration != null && expiration.before(new Date());
@@ -116,9 +115,12 @@ public class JwtTokenUtil {
         return claimsResolver.apply(claims);
     }
 
-    private String extractUsername(String token) {
+    public String extractUsername(String token) {
         Claims claims = extractAllClaims(token);
         return claims.getSubject();  // Subject is username
     }
 
+    private SecretKey getSignKey() {
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_KEY));
+    }
 }

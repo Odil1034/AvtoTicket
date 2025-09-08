@@ -1,6 +1,8 @@
 package uz.pdp.AutoTicket.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import uz.pdp.AutoTicket.enums.Gender;
 import uz.pdp.AutoTicket.enums.UserStatus;
@@ -18,7 +20,6 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
-
     @Column(nullable = false, unique = true)
     private String username;
 
@@ -46,7 +47,6 @@ public class User extends BaseEntity {
     private Gender gender = Gender.UNKNOWN;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "profile_images")
     private List<Document> profileImage;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -61,6 +61,7 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Card> cards;
 
+    @Builder.Default
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
@@ -69,6 +70,7 @@ public class User extends BaseEntity {
     )
     private Set<Role> roles = new HashSet<>();
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
-    private UserStatus status;
+    private UserStatus status = UserStatus.ACTIVE;
 }

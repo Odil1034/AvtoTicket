@@ -24,8 +24,8 @@ public record TokenResponseDTO(
         @NotNull Long userId,
 
         @NotNull TokenDTO access,
-
         @NotNull TokenDTO refresh) implements Response {
+
     public static TokenResponseDTO of(Long userId, TokenDTO access, TokenDTO refresh) {
         return new TokenResponseDTO(TokenType.BEARER, userId, access, refresh);
     }

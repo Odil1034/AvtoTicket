@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
                 String.valueOf(ex.getHttpStatus().value()),
                 req.getRequestURI(),
                 req.getRequestURL().toString(),
-                ex.getCause().toString(),
+                null,
                 ex.getMessage(),
                 LocalDateTime.now()
         );

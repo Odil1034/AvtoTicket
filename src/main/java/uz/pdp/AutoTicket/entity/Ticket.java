@@ -17,6 +17,7 @@ public class Ticket extends BaseEntity {
     @Column(name = "passenger_name")
     private String passengerName;
 
+    @Builder.Default
     @Column(name = "booking_time")
     private LocalDateTime bookingTime = LocalDateTime.now();
 

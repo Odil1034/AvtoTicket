@@ -36,12 +36,12 @@ public class PermissionServiceImp
     }
 
     @Override
-    public Response<Boolean> delete(Long aLong) {
+    public Response<Boolean> delete(Long id) {
         return null;
     }
 
     @Override
-    public Response<PermissionResponseDTO> find(Long aLong) {
+    public Response<PermissionResponseDTO> find(Long id) {
         return null;
     }
 
