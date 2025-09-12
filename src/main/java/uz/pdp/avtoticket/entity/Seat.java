@@ -1,0 +1,36 @@
+package uz.pdp.avtoticket.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+import uz.pdp.avtoticket.enums.SeatStatus;
+import uz.pdp.avtoticket.enums.SeatType;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
+@Table(name = "seats")
+public class Seat extends BaseEntity {
+
+    @Column(name = "seat_number", updatable = false)
+    private Integer seatNumber;
+
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    private SeatType type = SeatType.STANDARD; // BUSINESS, STANDARD
+
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    private SeatStatus status = SeatStatus.EMPTY;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bus_id", nullable = false)
+    private Bus bus;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trip_id")
+    private Trip trip;
+
+}
