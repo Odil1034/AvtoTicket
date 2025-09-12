@@ -26,4 +26,8 @@ public class Country extends BaseEntity {
 
     @OneToMany(mappedBy = "country")
     private List<Region> region;
+
+    public String getName() {
+        return name.name();
+    }
 }

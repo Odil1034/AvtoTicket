@@ -9,26 +9,40 @@ import uz.pdp.avtoticket.dto.request.CreateRoleDTO;
 import uz.pdp.avtoticket.dto.request.UpdateRoleDTO;
 import uz.pdp.avtoticket.dto.response.RoleResponseDTO;
 import uz.pdp.avtoticket.entity.Role;
+import uz.pdp.avtoticket.entity.User;
 import uz.pdp.avtoticket.exceptions.IsDeletedException;
+import uz.pdp.avtoticket.exceptions.ResourceNotFoundException;
+import uz.pdp.avtoticket.exceptions.UserNotFoundException;
 import uz.pdp.avtoticket.mapper.RoleMapper;
 import uz.pdp.avtoticket.repository.RoleRepository;
+import uz.pdp.avtoticket.repository.UserRepository;
+import uz.pdp.avtoticket.service.UserService;
 import uz.pdp.avtoticket.service.markers.AbstractService;
 import uz.pdp.avtoticket.service.PermissionService;
 import uz.pdp.avtoticket.service.RoleService;
 
+import java.nio.file.ReadOnlyFileSystemException;
 import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 @Service
 public class RoleServiceImp extends AbstractService<RoleRepository, RoleMapper> implements RoleService {
 
     private final PermissionService permissionService;
+    private final UserService userService;
+    private final UserRepository userRepository;
+    private final RoleMapper roleMapper;
 
     @Lazy
-    public RoleServiceImp(RoleRepository repository, RoleMapper mapper, PermissionService permissionService) {
+    public RoleServiceImp(RoleRepository repository, RoleMapper mapper, PermissionService permissionService, UserService userService, UserRepository userRepository,
+                          RoleMapper roleMapper) {
         super(repository, mapper);
         this.permissionService = permissionService;
+        this.userService = userService;
+        this.userRepository = userRepository;
+        this.roleMapper = roleMapper;
     }
 
     @Override
@@ -76,7 +90,8 @@ public class RoleServiceImp extends AbstractService<RoleRepository, RoleMapper> 
 
     @Override
     public Response<RoleResponseDTO> getRoleByName(String roleName) {
-        return null;
+        Role roleEntityByName = getRoleEntityByName(roleName);
+        return Response.ok(mapper.toDto(roleEntityByName));
     }
 
     @Override
@@ -105,9 +120,18 @@ public class RoleServiceImp extends AbstractService<RoleRepository, RoleMapper> 
     }
 
     @Override
-    public Set<String> getRoleNamesByUserId(Long userId) {
-        return Set.of();
+    public Response<Set<String>> getRoleNamesByUserId(Long userId) {
+        User user = userRepository.findByIdCustom(userId)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id {}", userId));
+        Set<Role> userRoles = user.getRoles();
+        Set<String> rolesStr = userRoles.stream().map(Role::getName).collect(Collectors.toSet());
+        return Response.ok(rolesStr);
     }
 
+    @Override
+    public Role getRoleEntityByName(String name) {
+        return repository.findByName(name)
+                .orElseThrow(() -> new ResourceNotFoundException("Role not found by name {}", name));
+    }
 }
 

@@ -1,6 +1,9 @@
 package uz.pdp.avtoticket.service.imp;
 
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import uz.pdp.avtoticket.config.SessionUser;
@@ -13,20 +16,26 @@ import uz.pdp.avtoticket.dto.response.OrderResponseDTO;
 import uz.pdp.avtoticket.dto.response.user.UserStatusDTO;
 import uz.pdp.avtoticket.dto.response.user.UserResponseDTO;
 import uz.pdp.avtoticket.dto.response.user.UserRolesDTO;
+import uz.pdp.avtoticket.entity.Role;
 import uz.pdp.avtoticket.entity.User;
 import uz.pdp.avtoticket.enums.RoleType;
 import uz.pdp.avtoticket.enums.UserStatus;
 import uz.pdp.avtoticket.exceptions.UserNotFoundException;
+import uz.pdp.avtoticket.mapper.RoleMapper;
 import uz.pdp.avtoticket.mapper.UserMapper;
 import uz.pdp.avtoticket.repository.UserRepository;
 import uz.pdp.avtoticket.service.PermissionService;
+import uz.pdp.avtoticket.service.TripService;
 import uz.pdp.avtoticket.service.markers.AbstractService;
 import uz.pdp.avtoticket.service.RoleService;
 import uz.pdp.avtoticket.service.UserService;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImp extends AbstractService<UserRepository, UserMapper> implements UserService {
@@ -35,15 +44,17 @@ public class UserServiceImp extends AbstractService<UserRepository, UserMapper> 
     private final PermissionService permissionService;
     private final SessionUser sessionUser;
     private final PasswordEncoder passwordEncoder;
+    private final TripService tripService;
 
     @Lazy
     public UserServiceImp(UserRepository repository, UserMapper mapper, RoleService roleService, PermissionService permissionService,
-                          SessionUser sessionUser, PasswordEncoder passwordEncoder) {
+                          SessionUser sessionUser, PasswordEncoder passwordEncoder, TripService tripService) {
         super(repository, mapper);
         this.roleService = roleService;
         this.permissionService = permissionService;
         this.sessionUser = sessionUser;
         this.passwordEncoder = passwordEncoder;
+        this.tripService = tripService;
     }
 
     @Override
@@ -147,27 +158,54 @@ public class UserServiceImp extends AbstractService<UserRepository, UserMapper> 
     }
 
     @Override
-    public Response<List<UserResponseDTO>> searchUsersByTripId(Long tripId) {
-        return null;
-    }
-
-    @Override
-    public Response<List<UserResponseDTO>> getUsersByStatus(UserStatus status) {
-        return null;
+    public Response<List<UserStatusDTO>> getUsersByStatus(UserStatus status) {
+        List<UserStatusDTO> dtos = new ArrayList<>();
+        for (User user : repository.findByStatus(status)) {
+            dtos.add(new UserStatusDTO(user.getId(), status));
+        }
+        return Response.ok(dtos);
     }
 
     @Override
     public Response<List<UserResponseDTO>> getTopUsers(int limit) {
-        return null;
+        Pageable pageable = PageRequest.of(0, limit, Sort.by("ticketCount").descending());
+        List<User> topUsers = repository.findTopUsersByTicketCount(pageable);
+        List<UserResponseDTO> dtoList = topUsers.stream()
+                .map(mapper::toDto)
+                .toList();
+        return Response.ok(dtoList);
     }
 
     @Override
-    public Response<UserResponseDTO> updateUserRoles(Long userId, List<String> roles) {
-        return null;
+    public Response<UserRolesDTO> updateUserRoles(Long userId, List<String> roles) {
+        User user = repository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User not with id %d found".formatted(userId)));
+        Set<Role> userRoles = new HashSet<>();
+        for (String role : roles) {
+            Role roleByName = roleService.getRoleEntityByName(role);
+            userRoles.add(roleByName);
+        }
+        user.setRoles(userRoles);
+        User savedUser = repository.save(user);
+        return Response.ok(new UserRolesDTO(userId, savedUser.getRoles()));
     }
 
     @Override
     public Response<UserRolesDTO> assignRoleToUser(Long userId, RoleType roleName) {
-        return null;
+        User user = repository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User not with id %d found".formatted(userId)));
+
+        Role role = roleService.getRoleEntityByName(roleName.name());
+
+        if (user.getRoles().contains(role)) {
+            return Response.error(HttpStatus.BAD_REQUEST,
+                    ErrorResponse.of("", "/avtoticket/user-manage/assign-role", "", "", "Role already assigned to user"));
+        }
+
+        user.getRoles().add(role);
+        User savedUser = repository.save(user);
+
+        UserRolesDTO dto = new UserRolesDTO(userId, savedUser.getRoles());
+        return Response.ok(dto);
     }
 }

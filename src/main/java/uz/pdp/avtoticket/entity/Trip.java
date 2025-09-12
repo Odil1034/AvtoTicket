@@ -6,6 +6,7 @@ import uz.pdp.avtoticket.enums.TripStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -45,5 +46,8 @@ public class Trip extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "bus_id", nullable = false)
     private Bus bus;
+
+    @OneToMany(mappedBy = "trip")
+    private Set<Ticket> tickets;
 
 }

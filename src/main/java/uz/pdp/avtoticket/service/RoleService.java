@@ -10,6 +10,7 @@ import uz.pdp.avtoticket.entity.Role;
 import uz.pdp.avtoticket.enums.RoleType;
 import uz.pdp.avtoticket.service.markers.GenericCruidService;
 
+import java.awt.datatransfer.Clipboard;
 import java.util.Set;
 
 @Service
@@ -38,6 +39,7 @@ public interface RoleService
     Response<RoleResponseDTO> assignPermissionsToRole(Long roleId, Set<String> permissions);
 
     // Foydalanuvchining role nomlarini olish
-    Set<String> getRoleNamesByUserId(Long userId);
+    Response<Set<String>> getRoleNamesByUserId(Long userId);
 
+    Role getRoleEntityByName(String name);
 }

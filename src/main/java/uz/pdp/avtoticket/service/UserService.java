@@ -38,16 +38,16 @@ public interface UserService
     Response<UserStatusDTO> unblockUser(@NotNull Long userId);
 
     // Foydalanuvchilarni qidirish (username, email, phone bo‘yicha)
-    Response<List<UserResponseDTO>> searchUsersByTripId(@NotNull Long tripId);
+//    Response<List<UserResponseDTO>> searchUsersByTripId(@NotNull Long tripId);
 
     // Foydalanuvchilarni status bo‘yicha filterlash (ACTIVE, BLOCKED, DELETED, va h.k.)
-    Response<List<UserResponseDTO>> getUsersByStatus(UserStatus status);
+    Response<List<UserStatusDTO>> getUsersByStatus(UserStatus status);
 
     // Statistikalar: eng ko‘p buyurtma qilgan userlar
     Response<List<UserResponseDTO>> getTopUsers(int limit);
 
     // Userning role(larini) yangilash
-    Response<UserResponseDTO> updateUserRoles(@NotNull Long userId, List<String> roles);
+    Response<UserRolesDTO> updateUserRoles(@NotNull Long userId, List<String> roles);
 
     // userga rol biriktirish.
     Response<UserRolesDTO> assignRoleToUser(@NotNull Long userId, RoleType roleName);

@@ -1,8 +1,10 @@
 package uz.pdp.avtoticket.service;
 
+import uz.pdp.avtoticket.dto.Response;
 import uz.pdp.avtoticket.dto.request.CreateTripDTO;
 import uz.pdp.avtoticket.dto.request.UpdateTripDTO;
 import uz.pdp.avtoticket.dto.response.TripResponseDTO;
+import uz.pdp.avtoticket.dto.response.user.UserResponseDTO;
 import uz.pdp.avtoticket.entity.Trip;
 import uz.pdp.avtoticket.service.markers.GenericCruidService;
 
@@ -42,4 +44,7 @@ public interface TripService
 
     // Bir necha tripni bekor qilish
     void cancelTrips(List<Long> tripIds);
+
+    Response<List<String>> getPassengerNamesByTripId(Long tripId);
+
 }
