@@ -10,6 +10,7 @@ import uz.pdp.avtoticket.config.SessionUser;
 import uz.pdp.avtoticket.dto.ErrorResponse;
 import uz.pdp.avtoticket.dto.Response;
 import uz.pdp.avtoticket.dto.request.ChangePasswordDTO;
+import uz.pdp.avtoticket.dto.request.UpdateEmailDTO;
 import uz.pdp.avtoticket.dto.request.UserCreateDTO;
 import uz.pdp.avtoticket.dto.request.UserUpdateDTO;
 import uz.pdp.avtoticket.dto.response.OrderResponseDTO;
@@ -21,7 +22,6 @@ import uz.pdp.avtoticket.entity.User;
 import uz.pdp.avtoticket.enums.RoleType;
 import uz.pdp.avtoticket.enums.UserStatus;
 import uz.pdp.avtoticket.exceptions.UserNotFoundException;
-import uz.pdp.avtoticket.mapper.RoleMapper;
 import uz.pdp.avtoticket.mapper.UserMapper;
 import uz.pdp.avtoticket.repository.UserRepository;
 import uz.pdp.avtoticket.service.PermissionService;
@@ -69,16 +69,6 @@ public class UserServiceImp extends AbstractService<UserRepository, UserMapper> 
     }
 
     @Override
-    public Response<UserResponseDTO> updateProfile(UserUpdateDTO dto) {
-        User user = repository.findByIdCustom(sessionUser.getId())
-                .orElseThrow(() -> new UserNotFoundException(
-                        "User not found with session id: {0}", sessionUser.getId()));
-        mapper.updateEntityFromDto(dto, user);
-        User save = repository.save(user);
-        return Response.ok(200, mapper.toDto(save), "User updated successfully");
-    }
-
-    @Override
     public Response<Boolean> changePassword(ChangePasswordDTO dto) {
         User user = repository.findByIdCustom(sessionUser.getId())
                 .orElseThrow(() -> new UserNotFoundException("User not found with session id: {0}", sessionUser.getId()));
@@ -100,7 +90,7 @@ public class UserServiceImp extends AbstractService<UserRepository, UserMapper> 
     public Response<UserResponseDTO> create(UserCreateDTO dto) {
         User user = mapper.fromCreate(dto);
         if (repository.existsUserByUsername(user.getUsername())) {
-            Response.error(
+            return Response.error(
                     HttpStatus.CONFLICT,
                     ErrorResponse.of("400", "user/create", "user/register", getClass().toString(), "Username already exists"));
         }
@@ -112,9 +102,11 @@ public class UserServiceImp extends AbstractService<UserRepository, UserMapper> 
     @Override
     public Response<UserResponseDTO> update(UserUpdateDTO dto) {
         User user = repository.findByIdCustom(sessionUser.getId())
-                .orElseThrow(() -> new UserNotFoundException(
-                        "User not found with session id: {0}", sessionUser.getId()));
-        mapper.updateEntityFromDto(dto, user);
+                .orElseThrow(() -> new UserNotFoundException("User not found with session id: {0}", sessionUser.getId()));
+        user.setUsername(dto.username());
+        user.setFirstName(dto.firstName());
+        user.setLastName(dto.lastName());
+        user.setDateOfBirth(dto.dateOfBirth());
         User save = repository.save(user);
         return Response.ok(200, mapper.toDto(save), "User updated successfully");
     }
@@ -207,5 +199,20 @@ public class UserServiceImp extends AbstractService<UserRepository, UserMapper> 
 
         UserRolesDTO dto = new UserRolesDTO(userId, savedUser.getRoles());
         return Response.ok(dto);
+    }
+
+    @Override
+    public Response<UserResponseDTO> changeEmail(UpdateEmailDTO dto) {
+        return null;
+    }
+
+    @Override
+    public Response<UserResponseDTO> changePhoneNumber(String phoneNumber) {
+        return null;
+    }
+
+    @Override
+    public Response<UserResponseDTO> changePassport(String passportNumber) {
+        return null;
     }
 }

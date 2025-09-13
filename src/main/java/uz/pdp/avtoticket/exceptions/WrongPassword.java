@@ -10,6 +10,6 @@ import uz.pdp.avtoticket.utils.ErrorCode;
 public class WrongPassword extends BaseException {
 
     public WrongPassword(String message, Object... args) {
-        super(HttpStatus.BAD_REQUEST, ErrorCode.WRONG_PASSWORD, message, args);
+        super(HttpStatus.BAD_REQUEST, ErrorCode.WRONG_PASSWORD.getMessage(), message, args);
     }
 }

@@ -1,6 +1,7 @@
 package uz.pdp.avtoticket.dto.request.address;
 
 import uz.pdp.avtoticket.dto.marker.Request;
+import uz.pdp.avtoticket.enums.CountryNames;
 
 /**
  * @author Baxriddinov Odiljon
@@ -8,6 +9,6 @@ import uz.pdp.avtoticket.dto.marker.Request;
  */
 public record UpdateCountryDTO(
         Long id,
-        String name
+        CountryNames name
 ) implements Request {
 }

@@ -17,24 +17,17 @@ import java.util.List;
 public interface AddressService extends
         GenericCruidService<Long, Address, AddressResponseDTO, CreateAddressDTO, UpdateAddressDTO> {
 
-    // Foydalanuvchining barcha adreslari
+    // All addresses of user
     Response<List<AddressResponseDTO>> getAddressesByUserId(Long userId);
 
-    // Busga tegishli manzillar (agar kerak bo‘lsa, masalan, marshrut start/end)
+    // addresses Busga tegishli manzillar (agar kerak bo‘lsa, masalan, marshrut start/end)
     Response<List<AddressResponseDTO>> getAddressesByBusId(Long busId);
 
-    // Shahar bo‘yicha adreslarni olish
-    Response<List<AddressResponseDTO>> getAddressesByCity(String city);
+    // Viloyat bo‘yicha adreslarni olish
+    Response<List<AddressResponseDTO>> getAddressesByRegion(Long regionId);
 
-    // Manzil nomi bo‘yicha qidiruv
-    Response<List<AddressResponseDTO>> searchAddresses(String query);
+    // Tuman bo‘yicha addresslarni olish
+    Response<List<AddressResponseDTO>> getAddressesByDistrict(Long districtId);
 
-    // Default address belgilash (foydalanuvchi uchun)
-    Response<Void> setDefaultAddress(Long userId, Long addressId);
-
-    // Default addressni olish
-    Response<AddressResponseDTO> getDefaultAddress(Long userId);
-
-    Response<List<AddressResponseDTO>> createAll(@Valid List<CreateAddressDTO> dto);
 }
 

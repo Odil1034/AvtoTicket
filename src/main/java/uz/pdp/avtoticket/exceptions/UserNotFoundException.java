@@ -15,6 +15,6 @@ import uz.pdp.avtoticket.utils.ErrorCode;
 public class UserNotFoundException extends BaseException {
 
     public UserNotFoundException(String message, Object... args) {
-        super(HttpStatus.NOT_FOUND, ErrorCode.NOT_FOUND, message, args);
+        super(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND.getMessage(), message, args);
     }
 }

@@ -9,6 +9,6 @@ import uz.pdp.avtoticket.utils.ErrorCode;
  */
 public class TokenExpiredException extends BaseException {
     public TokenExpiredException(String message, Object... args) {
-        super(HttpStatus.UNAUTHORIZED, ErrorCode.TOKEN_EXPIRED, message, args);
+        super(HttpStatus.UNAUTHORIZED, ErrorCode.TOKEN_EXPIRED.getMessage(), message, args);
     }
 }

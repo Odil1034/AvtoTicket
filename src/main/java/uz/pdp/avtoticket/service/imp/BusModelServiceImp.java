@@ -70,9 +70,9 @@ public class BusModelServiceImp extends AbstractService<BusModelRepository, BusM
     @Override
     public Response<BusModelResponseDTO> update(UpdateBusModelDTO dto) {
         BusModel busModel = repository.findByIdCustom(dto.id())
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "BusModel not found with session id: {0}", dto.id()));
-        mapper.updateEntityFromDto(dto, busModel);
+                .orElseThrow(() -> new ResourceNotFoundException("BusModel not found with session id: {0}", dto.id()));
+        busModel.setManufacturer(dto.manufacturer());
+        busModel.setName(dto.model());
         BusModel save = repository.save(busModel);
         return Response.ok(200, mapper.toDto(save), "BusModel updated successfully");
     }

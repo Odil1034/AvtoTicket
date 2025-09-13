@@ -10,6 +10,6 @@ import uz.pdp.avtoticket.utils.ErrorCode;
 public class ResourceNotFoundException extends BaseException {
 
     public ResourceNotFoundException(String message, Object... args) {
-        super(HttpStatus.NO_CONTENT, ErrorCode.RESOURCE_NOT_FOUND, message, args);
+        super(HttpStatus.NO_CONTENT, ErrorCode.RESOURCE_NOT_FOUND.name(), message, args);
     }
 }

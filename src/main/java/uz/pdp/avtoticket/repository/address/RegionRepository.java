@@ -24,4 +24,7 @@ public interface RegionRepository extends JpaRepository<Region, Long>, Repositor
     @Modifying
     @Query("UPDATE Region r SET r.isDeleted = TRUE WHERE r.id = :id")
     void deleteByIdCustom(Long id);
+
+    @Query("SELECT r FROM Region r WHERE r.isDeleted = false AND r.soatoId = :soatoId AND r.nameUz = :nameUz")
+    Optional<Region> findBySoatoIdAndNameUz(Long soatoId, String nameUz);
 }

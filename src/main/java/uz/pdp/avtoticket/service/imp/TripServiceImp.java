@@ -7,13 +7,13 @@ import uz.pdp.avtoticket.dto.request.CreateTripDTO;
 import uz.pdp.avtoticket.dto.request.UpdateTripDTO;
 import uz.pdp.avtoticket.dto.response.TripResponseDTO;
 import uz.pdp.avtoticket.dto.response.user.UserResponseDTO;
-import uz.pdp.avtoticket.entity.Ticket;
-import uz.pdp.avtoticket.entity.Trip;
-import uz.pdp.avtoticket.entity.User;
+import uz.pdp.avtoticket.entity.*;
 import uz.pdp.avtoticket.exceptions.ResourceNotFoundException;
 import uz.pdp.avtoticket.mapper.TripMapper;
+import uz.pdp.avtoticket.repository.BusRepository;
 import uz.pdp.avtoticket.repository.TripRepository;
 import uz.pdp.avtoticket.repository.UserRepository;
+import uz.pdp.avtoticket.repository.address.AddressRepository;
 import uz.pdp.avtoticket.service.TripService;
 import uz.pdp.avtoticket.service.markers.AbstractService;
 
@@ -28,15 +28,21 @@ import java.util.Set;
  */
 @Service
 public class TripServiceImp extends AbstractService<TripRepository, TripMapper> implements TripService {
-    private final UserRepository userRepository;
 
-    public TripServiceImp(TripRepository repository, TripMapper mapper, UserRepository userRepository) {
+    private final UserRepository userRepository;
+    private final BusRepository busRepository;
+    private final AddressRepository addressRepository;
+
+    public TripServiceImp(TripRepository repository, TripMapper mapper, UserRepository userRepository, BusRepository busRepository, AddressRepository addressRepository) {
         super(repository, mapper);
         this.userRepository = userRepository;
+        this.busRepository = busRepository;
+        this.addressRepository = addressRepository;
     }
 
     @Override
     public List<TripResponseDTO> getUpcomingTrips() {
+
         return List.of();
     }
 
@@ -99,9 +105,11 @@ public class TripServiceImp extends AbstractService<TripRepository, TripMapper> 
 
     @Override
     public Response<TripResponseDTO> create(CreateTripDTO dto) {
+        Bus bus = busRepository.findByIdCustom(dto.busId())
+                .orElseThrow(() -> new ResourceNotFoundException("Bus not found with id {0}", dto.busId()));
         Trip trip = mapper.fromCreate(dto);
-
-        return null;
+        Trip save = repository.save(trip);
+        return Response.ok(mapper.toDto(save));
     }
 
     @Override

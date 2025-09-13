@@ -7,6 +7,7 @@ import uz.pdp.avtoticket.dto.request.address.CreateCountryDTO;
 import uz.pdp.avtoticket.dto.request.address.UpdateCountryDTO;
 import uz.pdp.avtoticket.dto.response.address.CountryResponseDTO;
 import uz.pdp.avtoticket.entity.address.Country;
+import uz.pdp.avtoticket.enums.CountryNames;
 import uz.pdp.avtoticket.exceptions.ResourceNotFoundException;
 import uz.pdp.avtoticket.exceptions.UserNotFoundException;
 import uz.pdp.avtoticket.mapper.CountryMapper;
@@ -36,9 +37,8 @@ public class CountryServiceImp extends AbstractService<CountryRepository, Countr
     @Override
     public Response<CountryResponseDTO> update(UpdateCountryDTO dto) {
         Country country = repository.findByIdCustom(dto.id())
-                .orElseThrow(() -> new UserNotFoundException(
-                        "Country not found with id: {0}", dto.id()));
-        mapper.updateEntityFromDto(dto, country);
+                .orElseThrow(() -> new UserNotFoundException("Country not found with id: {0}", dto.id()));
+        country.setName(dto.name());
         Country save = repository.save(country);
         return Response.ok(200, mapper.toDto(save), "Country updated successfully");
     }
@@ -63,4 +63,9 @@ public class CountryServiceImp extends AbstractService<CountryRepository, Countr
                 .toList());
     }
 
+    @Override
+    public Country getCountryOrThrow(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Country not found with id {}", id));
+    }
 }

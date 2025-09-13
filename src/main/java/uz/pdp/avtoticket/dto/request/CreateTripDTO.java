@@ -1,8 +1,7 @@
 package uz.pdp.avtoticket.dto.request;
 
 import uz.pdp.avtoticket.dto.marker.Request;
-import uz.pdp.avtoticket.dto.request.address.CreateAddressDTO;
-import uz.pdp.avtoticket.dto.request.address.CreateDistrictDTO;
+import uz.pdp.avtoticket.dto.response.AddressResponseDTO;
 
 /**
  * @author Baxriddinov Odiljon
@@ -10,8 +9,8 @@ import uz.pdp.avtoticket.dto.request.address.CreateDistrictDTO;
  */
 public record CreateTripDTO(
         Long busId,
-        CreateAddressDTO fromAddress,
-        CreateAddressDTO toAddress,
+        AddressResponseDTO fromAddress,
+        AddressResponseDTO toAddress,
         Double distance,
         Integer countOfSeats,
         Double price

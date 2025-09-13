@@ -8,6 +8,6 @@ import uz.pdp.avtoticket.utils.ErrorCode;
 public class IsDeletedException extends BaseException {
 
     public IsDeletedException(String message, Object... args) {
-        super(HttpStatus.NO_CONTENT, ErrorCode.USER_ALREADY_EXIST, message, args);
+        super(HttpStatus.NO_CONTENT, ErrorCode.USER_ALREADY_EXISTS.getMessage(), message, args);
     }
 }

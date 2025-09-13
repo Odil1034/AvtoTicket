@@ -4,6 +4,7 @@ import uz.pdp.avtoticket.dto.Response;
 import uz.pdp.avtoticket.dto.request.CreateRouteDTO;
 import uz.pdp.avtoticket.dto.request.UpdateRouteDTO;
 import uz.pdp.avtoticket.dto.response.RouteResponseDTO;
+import uz.pdp.avtoticket.entity.Address;
 import uz.pdp.avtoticket.entity.Route;
 import uz.pdp.avtoticket.service.markers.GenericCruidService;
 
@@ -39,4 +40,10 @@ public interface RouteService
     Response<List<RouteResponseDTO>> getRoutesByDateAndTime(LocalDate date, LocalTime time);
 
     Response<Boolean> cancelRoute(Long routeId);
+
+    double calculateDistance(Address from, Address to);
+
+    LocalTime calculateEstimateTime(double distance);
+
+    String generateRouteName(Address from, Address to);
 }

@@ -14,4 +14,5 @@ import uz.pdp.avtoticket.service.markers.GenericCruidService;
 public interface CountryService
         extends GenericCruidService<Long, Country, CountryResponseDTO, CreateCountryDTO, UpdateCountryDTO> {
 
+    Country getCountryOrThrow(Long id);
 }

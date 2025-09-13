@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import uz.pdp.avtoticket.dto.Response;
 import uz.pdp.avtoticket.dto.request.ChangePasswordDTO;
+import uz.pdp.avtoticket.dto.request.UpdateEmailDTO;
 import uz.pdp.avtoticket.dto.request.UserCreateDTO;
 import uz.pdp.avtoticket.dto.request.UserUpdateDTO;
 import uz.pdp.avtoticket.dto.response.OrderResponseDTO;
@@ -23,9 +24,6 @@ public interface UserService
     User findByUsername(@NotNull @NotBlank String username);
 
     Response<UserResponseDTO> findMe();
-
-    // user profilini yangilaydi.
-    Response<UserResponseDTO> updateProfile(UserUpdateDTO dto);
 
     // user passwordini almashtiradi
     Response<Boolean> changePassword(ChangePasswordDTO dto);
@@ -51,5 +49,9 @@ public interface UserService
 
     // userga rol biriktirish.
     Response<UserRolesDTO> assignRoleToUser(@NotNull Long userId, RoleType roleName);
+
+    Response<UserResponseDTO> changeEmail(UpdateEmailDTO dto);
+    Response<UserResponseDTO> changePhoneNumber(@NotNull String phoneNumber);
+    Response<UserResponseDTO> changePassport(@NotNull String passportNumber);
 
 }

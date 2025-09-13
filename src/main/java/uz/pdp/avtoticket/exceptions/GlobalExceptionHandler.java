@@ -5,6 +5,7 @@ import uz.pdp.avtoticket.dto.ErrorResponse;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import uz.pdp.avtoticket.dto.Response;
 
 import java.time.LocalDateTime;
 
@@ -16,8 +17,8 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BaseException.class)
-    public ErrorResponse notFoundException(HttpServletRequest req, BaseException ex) {
-        return new ErrorResponse(
+    public Response<ErrorResponse> notFoundException(HttpServletRequest req, BaseException ex) {
+        ErrorResponse error = new ErrorResponse(
                 String.valueOf(ex.getHttpStatus().value()),
                 req.getRequestURI(),
                 req.getRequestURL().toString(),
@@ -25,5 +26,7 @@ public class GlobalExceptionHandler {
                 ex.getMessage(),
                 LocalDateTime.now()
         );
+
+        return Response.error(ex.getHttpStatus(), error);
     }
 }

@@ -1,18 +1,14 @@
 package uz.pdp.avtoticket.dto.request;
 
-import java.time.LocalTime;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 import uz.pdp.avtoticket.dto.marker.Request;
-import uz.pdp.avtoticket.dto.request.address.CreateDistrictDTO;
+import uz.pdp.avtoticket.dto.request.address.CreateAddressDTO;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public record UpdateRouteDTO(
         Long id,
-        CreateDistrictDTO fromAddress,
-        CreateDistrictDTO toAddress,
-        Double fromLongitude,
-        Double fromLatitude,
-        Double toLongitude,
-        Double toLatitude
+        CreateAddressDTO fromAddress,
+        CreateAddressDTO toAddress
 ) implements Request {
 
 }

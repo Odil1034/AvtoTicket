@@ -47,9 +47,11 @@ public class DistrictServiceImp
     @Override
     public Response<DistrictResponseDTO> update(UpdateDistrictDTO dto) {
         District district = repository.findByIdCustom(dto.id())
-                .orElseThrow(() -> new UserNotFoundException(
-                        "District not found with id: {0}", dto.id()));
-        mapper.updateEntityFromDto(dto, district);
+                .orElseThrow(() -> new UserNotFoundException("District not found with id: {0}", dto.id()));
+
+        district.setNameOz(district.getNameOz());
+        district.setNameRu(district.getNameRu());
+        district.setNameUz(district.getNameUz());
         District save = repository.save(district);
         return Response.ok(200, mapper.toDto(save), "District updated successfully");
     }

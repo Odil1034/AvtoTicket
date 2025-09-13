@@ -12,9 +12,6 @@ public record UserUpdateDTO(
         @NotNull @NotBlank String firstName,
         @NotNull @NotBlank String lastName,
         @NotNull LocalDate dateOfBirth,
-        @NotNull @NotBlank String passportNumber,
-        @NotNull @NotBlank String email,
-        @NotNull @NotBlank String phoneNumber,
         Gender gender
 ) implements Request {
 }

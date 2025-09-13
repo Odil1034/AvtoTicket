@@ -12,9 +12,7 @@ import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Configuration
 public class OpenApiConfig {
@@ -50,21 +48,21 @@ public class OpenApiConfig {
                 .addSecurityItem(new io.swagger.v3.oas.models.security.SecurityRequirement()
                         .addList("bearer-jwt"));
     }
-
-    private static final Map<String, String[]> GROUPS = new HashMap<>() {{
-        put("user", new String[]{"/avtoticket/user/**"});
-        put("auth", new String[]{"/avtoticket/auth/**"});
-        put("route", new String[]{"/avtoticket/route/**"});
-        put("bus", new String[]{"/avtoticket/bus/**", "/avtoticket/bus-model/**", "/avtoticket/bus/seats/**"});
-        put("address", new String[]{"/avtoticket/country/**", "/avtoticket/region/**", "/avtoticket/district/**"});
-        put("ticket", new String[]{"/avtoticket/ticket/**"});
-        put("order", new String[]{"/avtoticket/order/**"});
-        put("payment", new String[]{"/avtoticket/payment/**"});
-        put("trip", new String[]{"/avtoticket/trip/**"});
-        put("report", new String[]{"/avtoticket/report/**"});
-        put("user-manage", new String[]{"/avtoticket/super-admin/**"});
-        put("driver-manage", new String[]{"/avtoticket/driver/**"});
-    }};
+//
+//    private static final Map<String, String[]> GROUPS = new HashMap<>() {{
+//        put("user", new String[]{"/avtoticket/user/**"});
+//        put("auth", new String[]{"/avtoticket/auth/**"});
+//        put("route", new String[]{"/avtoticket/route/**"});
+//        put("bus", new String[]{"/avtoticket/bus/**", "/avtoticket/bus-model/**", "/avtoticket/bus/seats/**"});
+//        put("address", new String[]{"/avtoticket/country/**", "/avtoticket/region/**", "/avtoticket/district/**"});
+//        put("ticket", new String[]{"/avtoticket/ticket/**"});
+//        put("order", new String[]{"/avtoticket/order/**"});
+//        put("payment", new String[]{"/avtoticket/payment/**"});
+//        put("trip", new String[]{"/avtoticket/trip/**"});
+//        put("report", new String[]{"/avtoticket/report/**"});
+//        put("user-manage", new String[]{"/avtoticket/super-admin/**"});
+//        put("driver-manage", new String[]{"/avtoticket/driver/**"});
+//    }};
 
     @Bean
     public GroupedOpenApi all() {
@@ -75,12 +73,101 @@ public class OpenApiConfig {
     }
 
     @Bean
-    public List<GroupedOpenApi> apis() {
-        return GROUPS.entrySet().stream()
-                .map(entry -> GroupedOpenApi.builder()
-                        .group(entry.getKey())
-                        .pathsToMatch(entry.getValue())
-                        .build())
-                .toList();
+    public GroupedOpenApi user() {
+        return GroupedOpenApi.builder()
+                .group("user")
+                .pathsToMatch("/avtoticket/user/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi auth() {
+        return GroupedOpenApi.builder()
+                .group("auth")
+                .pathsToMatch("/avtoticket/auth/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi route() {
+        return GroupedOpenApi.builder()
+                .group("route")
+                .pathsToMatch("/avtoticket/route/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi bus() {
+        return GroupedOpenApi.builder()
+                .group("bus")
+                .pathsToMatch("/avtoticket/bus/**",
+                        "/avtoticket/bus-model/**",
+                        "/avtoticket/bus/seats/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi address() {
+        return GroupedOpenApi.builder()
+                .group("address")
+                .pathsToMatch("/avtoticket/country/**",
+                        "/avtoticket/region/**",
+                        "/avtoticket/district/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi ticket() {
+        return GroupedOpenApi.builder()
+                .group("ticket")
+                .pathsToMatch("/avtoticket/ticket/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi order() {
+        return GroupedOpenApi.builder()
+                .group("order")
+                .pathsToMatch("/avtoticket/order/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi payment() {
+        return GroupedOpenApi.builder()
+                .group("payment")
+                .pathsToMatch("/avtoticket/payment/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi trip() {
+        return GroupedOpenApi.builder()
+                .group("trip")
+                .pathsToMatch("/avtoticket/trip/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi report() {
+        return GroupedOpenApi.builder()
+                .group("report")
+                .pathsToMatch("/avtoticket/report/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi userManage() {
+        return GroupedOpenApi.builder()
+                .group("user-manage")
+                .pathsToMatch("/avtoticket/super-admin/**")
+                .build();
+    }
+    @Bean
+    public GroupedOpenApi driverManage() {
+        return GroupedOpenApi.builder()
+                .group("driver-manage")
+                .pathsToMatch("/avtoticket/admin/driver/**")
+                .build();
     }
 }

@@ -10,6 +10,8 @@ import uz.pdp.avtoticket.entity.Trip;
  * @author Baxriddinov Odiljon
  * @since 12/09/2025 08:53
  */
-@Mapper(componentModel = "spring")
-public interface TripMapper  extends GenericMapper<Trip, TripResponseDTO, CreateTripDTO, UpdateTripDTO> {
+@Mapper(componentModel = "spring", uses = {SeatMapper.class, TicketMapper.class})
+public interface TripMapper
+        extends GenericMapper<Trip, TripResponseDTO, CreateTripDTO, UpdateTripDTO> {
+
 }
