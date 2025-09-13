@@ -1,17 +1,11 @@
 package uz.pdp.avtoticket.service.token;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import uz.pdp.avtoticket.config.SessionUser;
 import uz.pdp.avtoticket.dto.Response;
-import uz.pdp.avtoticket.dto.request.auth.TokenRequestDTO;
+import uz.pdp.avtoticket.dto.request.auth.TokenDTO;
 import uz.pdp.avtoticket.dto.request.auth.TokenResponseDTO;
-import uz.pdp.avtoticket.dto.response.user.UserResponseDTO;
+import uz.pdp.avtoticket.entity.RefreshToken;
 import uz.pdp.avtoticket.entity.User;
 import uz.pdp.avtoticket.exceptions.TokenExpiredException;
 import uz.pdp.avtoticket.exceptions.UserNotFoundException;
@@ -22,7 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 import uz.pdp.avtoticket.utils.JwtTokenUtils;
 
-import javax.crypto.SecretKey;
+import java.time.LocalDateTime;
 
 /**
  * @author Baxriddinov Odiljon
@@ -36,7 +30,7 @@ public class TokenService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
     private final JwtTokenUtils jwtTokenUtils;
-    private final SessionUser sessionUser;
+    private final RefreshTokenService refreshTokenService;
 
     public Response<TokenResponseDTO> generateToken(@NotNull String username, @NotNull String password) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
@@ -45,7 +39,8 @@ public class TokenService {
                 () -> new UserNotFoundException("User not found with username: {0}", username)
         );
         var accessToken = jwtTokenUtils.generateAccessToken(user.getId(), user.getUsername(), user.getRoles());
-        var refreshToken = jwtTokenUtils.generateRefreshToken(user.getUsername());
+        TokenDTO refreshToken = jwtTokenUtils.generateRefreshToken(user.getUsername());
+        refreshTokenService.save(refreshToken);
 
         return Response.ok(TokenResponseDTO.of(user.getId(), accessToken, refreshToken));
     }
@@ -54,6 +49,14 @@ public class TokenService {
         if (!jwtTokenUtils.validateToken(refreshToken)) {
             throw new TokenExpiredException("Token has expired or invalid: {0}", refreshToken);
         }
+
+        RefreshToken savedToken = refreshTokenService.findByToken(refreshToken)
+                .orElseThrow(() -> new TokenExpiredException("Refresh token not found in DB"));
+
+        if (savedToken.getExpiredAt().isBefore(LocalDateTime.now())) {
+            throw new TokenExpiredException("Refresh token expired: {0}", refreshToken);
+        }
+
         String username = jwtTokenUtils.extractUsername(refreshToken);
         User user = userRepository.findByUsername(username).orElseThrow(
                 () -> new UserNotFoundException("User not found with username: {0}", username));

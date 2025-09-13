@@ -4,7 +4,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +15,6 @@ import uz.pdp.avtoticket.entity.Role;
 import uz.pdp.avtoticket.service.RoleService;
 
 import javax.crypto.SecretKey;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -60,7 +58,6 @@ public class JwtTokenUtils {
                 .expiration(Date.from(expiredAt.atZone(ZoneId.systemDefault()).toInstant()))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
-        System.out.println(token);
 
         return new TokenDTO(token, issuedAt, expiredAt, ACCESS_TOKEN_EXPIRATION / 1000);
     }
@@ -74,7 +71,6 @@ public class JwtTokenUtils {
                 .expiration(Date.from(expiredAt.atZone(ZoneId.systemDefault()).toInstant()))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
-        System.out.println(token);
 
         return new TokenDTO(token, issuedAt, expiredAt, REFRESH_TOKEN_EXPIRATION / 1000);
     }
