@@ -25,4 +25,7 @@ public interface AddressRepository extends JpaRepository<Address, Long>, Reposit
     @Modifying
     @Query("UPDATE Address a SET a.isDeleted = TRUE WHERE a.id = :id")
     void deleteByIdCustom(Long id);
+
+    @Query("SELECT a FROM Address a WHERE a.district.id = :districtId AND a.isDeleted = false")
+    List<Address> findByDistrictId(Long districtId);
 }

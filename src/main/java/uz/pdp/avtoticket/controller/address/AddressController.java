@@ -30,11 +30,6 @@ public class AddressController {
         return ResponseEntity.ok(addressService.create(dto));
     }
 
-    @PostMapping("/create-all")
-    public ResponseEntity<Response<List<AddressResponseDTO>>> createAll(@Valid @RequestBody List<CreateAddressDTO> dto) {
-        return ResponseEntity.ok(addressService.createAll(dto));
-    }
-
     @GetMapping("/get/{id}")
     public ResponseEntity<Response<AddressResponseDTO>> getById(@PathVariable Long id) {
         return ResponseEntity.ok(addressService.find(id));
