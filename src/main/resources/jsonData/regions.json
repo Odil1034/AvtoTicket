@@ -1,0 +1,100 @@
+[
+  {
+    "soatoId": 1722,
+    "countryId": 1,
+    "nameUz": "Surxondaryo viloyati",
+    "nameOz": "Сурхондарё вилояти",
+    "nameRu": "Сурхандарьинская область"
+  },
+  {
+    "soatoId": 1703,
+    "countryId": 1,
+    "nameUz": "Andijon viloyati",
+    "nameOz": "Андижон вилояти",
+    "nameRu": "Андижанская область"
+  },
+  {
+    "soatoId": 1706,
+    "countryId": 1,
+    "nameUz": "Buxoro viloyati",
+    "nameOz": "Бухоро вилояти",
+    "nameRu": "Бухарская область"
+  },
+  {
+    "soatoId": 1708,
+    "countryId": 1,
+    "nameUz": "Jizzax viloyati",
+    "nameOz": "Жиззах вилояти",
+    "nameRu": "Джизакская область"
+  },
+  {
+    "soatoId": 1710,
+    "countryId": 1,
+    "nameUz": "Qashqadaryo viloyati",
+    "nameOz": "Қашқадарё вилояти",
+    "nameRu": "Кашкадарьинская область"
+  },
+  {
+    "soatoId": 1712,
+    "countryId": 1,
+    "nameUz": "Navoiy viloyati",
+    "nameOz": "Навоий вилояти",
+    "nameRu": "Навоийская область"
+  },
+  {
+    "soatoId": 1714,
+    "countryId": 1,
+    "nameUz": "Namangan viloyati",
+    "nameOz": "Наманган вилояти",
+    "nameRu": "Наманганская область"
+  },
+  {
+    "soatoId": 1718,
+    "countryId": 1,
+    "nameUz": "Samarqand viloyati",
+    "nameOz": "Самарқанд вилояти",
+    "nameRu": "Самаркандская область"
+  },
+  {
+    "soatoId": 1724,
+    "countryId": 1,
+    "nameUz": "Sirdaryo viloyati",
+    "nameOz": "Сирдарё вилояти",
+    "nameRu": "Сырдарьинская область"
+  },
+  {
+    "soatoId": 1726,
+    "countryId": 1,
+    "nameUz": "Toshkent shahri",
+    "nameOz": "Тошкент шаҳри",
+    "nameRu": "город Ташкент"
+  },
+  {
+    "soatoId": 1727,
+    "countryId": 1,
+    "nameUz": "Toshkent viloyati",
+    "nameOz": "Тошкент вилояти",
+    "nameRu": "Ташкентская область"
+  },
+  {
+    "soatoId": 1730,
+    "countryId": 1,
+    "nameUz": "Farg'ona viloyati",
+    "nameOz": "Фарғона вилояти",
+    "nameRu": "Ферганская область"
+  },
+  {
+    "soatoId": 1733,
+    "countryId": 1,
+    "nameUz": "Xorazm viloyati",
+    "nameOz": "Хоразм вилояти",
+    "nameRu": "Хорезмская область"
+  },
+  {
+    "soatoId": 1735,
+    "countryId": 1,
+    "nameUz": "Qoraqalpog'iston Respublikasi",
+    "nameOz": "Қорақалпоғистон Республикаси",
+    "nameRu": "Республика Каракалпакстан"
+  }
+]

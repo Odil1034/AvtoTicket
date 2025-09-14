@@ -15,7 +15,7 @@ public record CreateRegionDTO(
         Long soatoId,
         Long countryId,
         String nameUz,
-        String nameRu,
-        String nameOz
+        String nameOz,
+        String nameRu
 ) implements Request {
 }

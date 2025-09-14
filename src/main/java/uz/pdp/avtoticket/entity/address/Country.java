@@ -2,7 +2,8 @@ package uz.pdp.avtoticket.entity.address;
 
 import jakarta.persistence.*;
 import lombok.*;
-import uz.pdp.avtoticket.entity.BaseEntity;
+import lombok.experimental.SuperBuilder;
+import uz.pdp.avtoticket.entity.BaseEntityNoAudit;
 import uz.pdp.avtoticket.enums.CountryNames;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Table(name = "countries")
-public class Country extends BaseEntity {
+public class Country extends BaseEntityNoAudit {
 
     @Builder.Default
     @Enumerated(EnumType.STRING)

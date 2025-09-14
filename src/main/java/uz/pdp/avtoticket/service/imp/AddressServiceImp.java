@@ -58,6 +58,20 @@ public class AddressServiceImp
     }
 
     @Override
+    public Address buildAndSaveAddress(CreateAddressDTO dto) {
+        District district = districtRepository.findByIdCustom(dto.districtId())
+                .orElseThrow(() -> new ResourceNotFoundException("District not found with id {0}", dto.districtId()));
+        Address newAddress = Address.builder()
+                .district(district)
+                .region(district.getRegion())
+                .country(district.getRegion().getCountry())
+                .longitude(dto.longitude())
+                .latitude(dto.latitude())
+                .build();
+        return repository.save(newAddress);
+    }
+
+    @Override
     public Response<AddressResponseDTO> create(CreateAddressDTO dto) {
         District district = districtRepository.findByIdCustom(dto.districtId())
                 .orElseThrow(() -> new ResourceNotFoundException("District not found with id {0}", dto.districtId()));

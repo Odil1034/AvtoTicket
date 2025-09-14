@@ -1,7 +1,7 @@
 package uz.pdp.avtoticket.service.markers;
 
 import jakarta.validation.constraints.NotNull;
-import uz.pdp.avtoticket.entity.BaseEntity;
+import uz.pdp.avtoticket.entity.BaseDomain;
 import uz.pdp.avtoticket.dto.Response;
 
 import java.io.Serializable;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface GenericQueryService<
         ID extends Serializable,
-        E extends BaseEntity,
+        E extends BaseDomain,
         R extends uz.pdp.avtoticket.dto.marker.Response>
         extends GenericService {
 

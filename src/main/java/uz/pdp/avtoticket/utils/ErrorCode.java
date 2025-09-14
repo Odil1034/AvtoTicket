@@ -51,7 +51,9 @@ public enum ErrorCode {
     // ==== GENERAL ====
     RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND, "Resource not found"),
     VALIDATION_ERROR(HttpStatus.BAD_REQUEST, "Validation error"),
-    INTERNAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
+    INTERNAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"),
+    ACCESS_DENIED(HttpStatus.FORBIDDEN, "Access denied"),
+    AUTHENTICATION_ENTRY_POINT(HttpStatus.UNAUTHORIZED, "UnAuthorized");
 
     private final HttpStatus status;
     private final String message;

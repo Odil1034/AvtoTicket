@@ -29,8 +29,8 @@ public class CountryServiceImp extends AbstractService<CountryRepository, Countr
 
     @Override
     public Response<CountryResponseDTO> create(CreateCountryDTO dto) {
-        Country country = mapper.fromCreate(dto);
-        Country save = repository.save(country);
+        Country build = Country.builder().name(dto.name()).build();
+        Country save = repository.save(build);
         return Response.ok(HttpStatus.CREATED, mapper.toDto(save));
     }
 
@@ -53,7 +53,7 @@ public class CountryServiceImp extends AbstractService<CountryRepository, Countr
     public Response<CountryResponseDTO> find(Long id) {
         return Response.ok(mapper.toDto(repository
                 .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Country not with id {}", id))));
+                .orElseThrow(() -> new ResourceNotFoundException("Country not with id  {0}", id))));
     }
 
     @Override
@@ -66,6 +66,6 @@ public class CountryServiceImp extends AbstractService<CountryRepository, Countr
     @Override
     public Country getCountryOrThrow(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Country not found with id {}", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Country not found with id  {0}", id));
     }
 }

@@ -75,7 +75,7 @@ public class UserServiceImp extends AbstractService<UserRepository, UserMapper> 
         if (passwordEncoder.matches(dto.oldPassword(), user.getPassword())) {
             user.setPassword(passwordEncoder.encode(dto.newPassword()));
             repository.save(user);
-            return Response.ok(true);
+            return Response.ok(200, true, "Password changed successfully ✔✔✔");
         }
         return Response.error(HttpStatus.BAD_REQUEST,
                 ErrorResponse.of("400", "/user/update", "", getClass().toString(), "Password does not match"));
@@ -134,7 +134,7 @@ public class UserServiceImp extends AbstractService<UserRepository, UserMapper> 
     @Override
     public Response<UserStatusDTO> blockUser(Long userId) {
         User user = repository.findByIdCustom(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found with id {}", userId));
+                .orElseThrow(() -> new UserNotFoundException("User not found with id  {0}", userId));
         user.setStatus(UserStatus.BLOCKED);
         User save = repository.save(user);
         return Response.ok(HttpStatus.OK, new UserStatusDTO(save.getId(), save.getStatus()));
@@ -143,7 +143,7 @@ public class UserServiceImp extends AbstractService<UserRepository, UserMapper> 
     @Override
     public Response<UserStatusDTO> unblockUser(Long userId) {
         User user = repository.findBlockedUser(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found with id {}", userId));
+                .orElseThrow(() -> new UserNotFoundException("User not found with id  {0}", userId));
         user.setStatus(UserStatus.ACTIVE);
         User save = repository.save(user);
         return Response.ok(HttpStatus.OK, new UserStatusDTO(save.getId(), save.getStatus()));

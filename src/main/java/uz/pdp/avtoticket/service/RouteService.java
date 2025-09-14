@@ -8,7 +8,9 @@ import uz.pdp.avtoticket.entity.Address;
 import uz.pdp.avtoticket.entity.Route;
 import uz.pdp.avtoticket.service.markers.GenericCruidService;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -43,7 +45,7 @@ public interface RouteService
 
     double calculateDistance(Address from, Address to);
 
-    LocalTime calculateEstimateTime(double distance);
+    String calculateEstimateTime(double distance);
 
     String generateRouteName(Address from, Address to);
 }

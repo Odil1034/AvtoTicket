@@ -19,6 +19,7 @@ import uz.pdp.avtoticket.service.CountryService;
 import uz.pdp.avtoticket.service.RegionService;
 import uz.pdp.avtoticket.service.markers.AbstractService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,12 +29,10 @@ import java.util.Optional;
  */
 @Service
 public class RegionServiceImp extends AbstractService<RegionRepository, RegionMapper> implements RegionService {
-    private final CountryService countryService;
     private final CountryRepository countryRepository;
 
-    public RegionServiceImp(RegionRepository repository, RegionMapper mapper, CountryService countryService, CountryRepository countryRepository) {
+    public RegionServiceImp(RegionRepository repository, RegionMapper mapper, CountryRepository countryRepository) {
         super(repository, mapper);
-        this.countryService = countryService;
         this.countryRepository = countryRepository;
     }
 
@@ -52,22 +51,11 @@ public class RegionServiceImp extends AbstractService<RegionRepository, RegionMa
                     )
             );
         }
-        Optional<Country> existingCountry = countryRepository.findByIdCustom(dto.countryId());
-        if (existingCountry.isEmpty()) {
-            return Response.error(
-                    HttpStatus.BAD_REQUEST,
-                    ErrorResponse.of(
-                            "400",
-                            "/region/create",
-                            "/avtoticket/region/create",
-                            getClass().getSimpleName(),
-                            "Country is not found"
-                    )
-            );
-        }
+        Country country = countryRepository.findByIdCustom(dto.countryId())
+                .orElseThrow(() -> new ResourceNotFoundException("Country not found with id {0}", dto.countryId()));
 
         Region newRegion = Region.builder()
-                .country(existingCountry.get())
+                .country(country)
                 .soatoId(dto.soatoId())
                 .nameUz(dto.nameUz())
                 .nameRu(dto.nameRu())
@@ -101,7 +89,7 @@ public class RegionServiceImp extends AbstractService<RegionRepository, RegionMa
     public Response<RegionResponseDTO> find(Long id) {
         return Response.ok(mapper.toDto(repository
                 .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Region not with id {}", id))));
+                .orElseThrow(() -> new ResourceNotFoundException("Region not with id  {0}", id))));
     }
 
     @Override
@@ -113,8 +101,10 @@ public class RegionServiceImp extends AbstractService<RegionRepository, RegionMa
 
     @Override
     public Response<List<RegionResponseDTO>> createAll(List<CreateRegionDTO> dto) {
-        List<Region> collect = dto.stream().map(mapper::fromCreate).toList();
-        List<Region> regions = repository.saveAll(collect);
-        return Response.ok(regions.stream().map(mapper::toDto).toList());
+        List<RegionResponseDTO> regions = new ArrayList<>();
+        for (CreateRegionDTO createRegionDTO : dto) {
+            regions.add(create(createRegionDTO).getData());
+        }
+        return Response.ok(regions);
     }
 }

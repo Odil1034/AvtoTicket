@@ -89,7 +89,7 @@ public class TripServiceImp extends AbstractService<TripRepository, TripMapper> 
     @Override
     public Response<List<String>> getPassengerNamesByTripId(Long tripId) {
         Trip trip = repository.findByIdCustom(tripId)
-                .orElseThrow(() -> new ResourceNotFoundException("Trip not found with id {}", tripId));
+                .orElseThrow(() -> new ResourceNotFoundException("Trip not found with id  {0}", tripId));
         Set<Ticket> tickets = trip.getTickets();
 
         List<String> passengerNames = new ArrayList<>();

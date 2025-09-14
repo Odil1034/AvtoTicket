@@ -32,7 +32,6 @@ public class SecurityConfig {
     private final CorsProperty corsProperty;
     private final CorsConfigurationSource corsConfigurationSource;
 
-
     String[] WHITE_LIST = {
             "/swagger-ui.html",
             "/swagger-ui/**",

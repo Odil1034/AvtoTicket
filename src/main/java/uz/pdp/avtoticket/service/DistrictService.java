@@ -20,7 +20,7 @@ import java.util.List;
 public interface DistrictService
         extends GenericCruidService<Long, District, DistrictResponseDTO, CreateDistrictDTO, UpdateDistrictDTO> {
 
-    Response<Void> createAll(@Valid List<CreateDistrictDTO> dto);
+    Response<List<DistrictResponseDTO>> createAll(@Valid List<CreateDistrictDTO> dto);
 
     Response<List<DistrictResponseDTO>> findAllByRegionId(@NotNull Long regionId);
 }

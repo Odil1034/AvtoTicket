@@ -3,7 +3,7 @@ package uz.pdp.avtoticket.service.markers;
 import jakarta.validation.constraints.NotNull;
 import uz.pdp.avtoticket.dto.Response;
 import uz.pdp.avtoticket.dto.marker.Request;
-import uz.pdp.avtoticket.entity.BaseEntity;
+import uz.pdp.avtoticket.entity.BaseDomain;
 
 import java.io.Serializable;
 
@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public interface GenericCruidService<
         ID extends Serializable,
-        E extends BaseEntity,
+        E extends BaseDomain,
         R extends uz.pdp.avtoticket.dto.marker.Response,
         CR extends Request,
         UP extends Request>

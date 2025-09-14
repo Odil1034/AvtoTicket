@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import uz.pdp.avtoticket.entity.Auditable;
 import uz.pdp.avtoticket.entity.BaseEntity;
+import uz.pdp.avtoticket.entity.BaseEntityNoAudit;
 
 /**
  * @author Baxriddinov Odiljon
@@ -17,7 +19,7 @@ import uz.pdp.avtoticket.entity.BaseEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "districts")
-public class District extends BaseEntity {
+public class District extends BaseEntityNoAudit {
 
     @Column(name = "soato_id", unique = true)
     private Long soatoId;
@@ -28,10 +30,10 @@ public class District extends BaseEntity {
     @Column(name = "name_ru", nullable = false, unique = true)
     private String nameRu;
 
-    @Column(name = "name_Oz", nullable = false, unique = true)
+    @Column(name = "name_oz", nullable = false, unique = true)
     private String nameOz;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "region_id", nullable = false)
     private Region region;
 

@@ -10,6 +10,6 @@ import uz.pdp.avtoticket.entity.Route;
  * @author Baxriddinov Odiljon
  * @since 05/09/2025 22:27
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {DistrictMapper.class})
 public interface RouteMapper extends GenericMapper<Route, RouteResponseDTO, CreateRouteDTO, UpdateRouteDTO> {
 }

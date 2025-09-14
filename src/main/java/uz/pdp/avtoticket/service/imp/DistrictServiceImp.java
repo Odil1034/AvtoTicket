@@ -2,6 +2,7 @@ package uz.pdp.avtoticket.service.imp;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import uz.pdp.avtoticket.dto.Response;
 import uz.pdp.avtoticket.dto.request.address.CreateDistrictDTO;
 import uz.pdp.avtoticket.dto.request.address.UpdateDistrictDTO;
@@ -16,6 +17,7 @@ import uz.pdp.avtoticket.repository.address.RegionRepository;
 import uz.pdp.avtoticket.service.DistrictService;
 import uz.pdp.avtoticket.service.markers.AbstractService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +37,7 @@ public class DistrictServiceImp
 
     public Response<DistrictResponseDTO> create(CreateDistrictDTO dto) {
         Region region = regionRepository.findByIdCustom(dto.regionId())
-                .orElseThrow(() -> new ResourceNotFoundException("Region not found with id {}", dto.regionId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Region not found with id  {0}", dto.regionId()));
 
         District district = mapper.fromCreate(dto);
         district.setRegion(region);
@@ -49,9 +51,9 @@ public class DistrictServiceImp
         District district = repository.findByIdCustom(dto.id())
                 .orElseThrow(() -> new UserNotFoundException("District not found with id: {0}", dto.id()));
 
-        district.setNameOz(district.getNameOz());
-        district.setNameRu(district.getNameRu());
-        district.setNameUz(district.getNameUz());
+        district.setNameOz(dto.nameOz());
+        district.setNameRu(dto.nameRu());
+        district.setNameUz(dto.nameUz());
         District save = repository.save(district);
         return Response.ok(200, mapper.toDto(save), "District updated successfully");
     }
@@ -66,7 +68,7 @@ public class DistrictServiceImp
     public Response<DistrictResponseDTO> find(Long id) {
         return Response.ok(mapper.toDto(repository
                 .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("District not with id {}", id))));
+                .orElseThrow(() -> new ResourceNotFoundException("District not with id {0}", id))));
     }
 
     @Override
@@ -77,9 +79,12 @@ public class DistrictServiceImp
     }
 
     @Override
-    public Response<Void> createAll(List<CreateDistrictDTO> dto) {
-        dto.forEach(this::create);
-        return Response.ok(null);
+    public Response<List<DistrictResponseDTO>> createAll(List<CreateDistrictDTO> dto) {
+        List<DistrictResponseDTO> districts = new ArrayList<>();
+        for (CreateDistrictDTO createDistrictDTO : dto) {
+            districts.add(create(createDistrictDTO).getData());
+        }
+        return Response.ok(districts);
     }
 
     @Override

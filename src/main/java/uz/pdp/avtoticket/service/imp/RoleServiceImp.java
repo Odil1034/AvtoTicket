@@ -122,7 +122,7 @@ public class RoleServiceImp extends AbstractService<RoleRepository, RoleMapper> 
     @Override
     public Response<Set<String>> getRoleNamesByUserId(Long userId) {
         User user = userRepository.findByIdCustom(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found with id {}", userId));
+                .orElseThrow(() -> new UserNotFoundException("User not found with id  {0}", userId));
         Set<Role> userRoles = user.getRoles();
         Set<String> rolesStr = userRoles.stream().map(Role::getName).collect(Collectors.toSet());
         return Response.ok(rolesStr);
@@ -131,7 +131,7 @@ public class RoleServiceImp extends AbstractService<RoleRepository, RoleMapper> 
     @Override
     public Role getRoleEntityByName(String name) {
         return repository.findByName(name)
-                .orElseThrow(() -> new ResourceNotFoundException("Role not found by name {}", name));
+                .orElseThrow(() -> new ResourceNotFoundException("Role not found by name  {0}", name));
     }
 }
 

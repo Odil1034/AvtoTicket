@@ -2,7 +2,7 @@ package uz.pdp.avtoticket.entity.address;
 
 import jakarta.persistence.*;
 import lombok.*;
-import uz.pdp.avtoticket.entity.BaseEntity;
+import uz.pdp.avtoticket.entity.BaseEntityNoAudit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Table(name = "regions")
-public class Region extends BaseEntity {
+public class Region extends BaseEntityNoAudit {
 
     @Column(name = "soato_id", unique = true)
     private Long soatoId;
@@ -32,7 +32,7 @@ public class Region extends BaseEntity {
     @Column(name = "name_oz", nullable = false, unique = true)
     private String nameOz;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER )
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 

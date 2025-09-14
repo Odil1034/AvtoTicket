@@ -1,6 +1,9 @@
 package uz.pdp.avtoticket.entity.notification;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import uz.pdp.avtoticket.enums.SMSType;
@@ -18,13 +21,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@Table(name = "sms_notifications")
 public class SMSNotification extends Notification {
     private boolean unicode;
     private Integer maxRetries;
     private String templateId;
     private String message;
     @Builder.Default
+    @Enumerated(EnumType.STRING)
     private SMSType smsType = NotificationConstants.DEFAULT_SMS_TYPE; // sms | otp | mms | whatsapp
+    @Builder.Default
     private LocalDateTime expiresAt = NotificationConstants.SMS_EXPIRED_AT; // OTP uchun TTL
 }
 

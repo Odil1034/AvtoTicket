@@ -30,7 +30,7 @@ public class DistrictController {
     }
 
     @PostMapping("create-all")
-    private ResponseEntity<Response<Void>> createAll(@Valid @RequestBody List<CreateDistrictDTO> dto) {
+    private ResponseEntity<Response<List<DistrictResponseDTO>>> createAll(@Valid @RequestBody List<CreateDistrictDTO> dto) {
         return ResponseEntity.ok(districtService.createAll(dto));
     }
 

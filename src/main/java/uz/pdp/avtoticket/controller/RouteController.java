@@ -3,12 +3,10 @@ package uz.pdp.avtoticket.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uz.pdp.avtoticket.dto.Response;
 import uz.pdp.avtoticket.dto.request.CreateRouteDTO;
+import uz.pdp.avtoticket.dto.request.UpdateRouteDTO;
 import uz.pdp.avtoticket.dto.response.RouteResponseDTO;
 import uz.pdp.avtoticket.service.RouteService;
 import uz.pdp.avtoticket.utils.Constants;
@@ -28,5 +26,20 @@ public class RouteController {
     @PostMapping("/create")
     public ResponseEntity<Response<RouteResponseDTO>> createRoute(@Valid @RequestBody CreateRouteDTO dto) {
         return ResponseEntity.ok(routeService.create(dto));
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Response<RouteResponseDTO>> getRouteById(@PathVariable Long id) {
+        return ResponseEntity.ok(routeService.find(id));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Response<RouteResponseDTO>> updateRoute(@Valid @RequestBody UpdateRouteDTO dto) {
+        return ResponseEntity.ok(routeService.update(dto));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Response<Boolean>> deleteRouteById(@PathVariable Long id) {
+        return ResponseEntity.ok(routeService.delete(id));
     }
 }

@@ -29,5 +29,6 @@ public interface AddressService extends
     // Tuman bo‘yicha addresslarni olish
     Response<List<AddressResponseDTO>> getAddressesByDistrict(Long districtId);
 
+    Address buildAndSaveAddress(CreateAddressDTO createAddressDTO);
 }
 

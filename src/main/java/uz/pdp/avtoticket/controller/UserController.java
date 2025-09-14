@@ -22,7 +22,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/change-password")
+    @PostMapping("/change-password")
     public ResponseEntity<Response<Boolean>> changePassword(@Valid @RequestBody ChangePasswordDTO dto) {
         return ResponseEntity.ok(userService.changePassword(dto));
     }
@@ -31,6 +31,4 @@ public class UserController {
     public ResponseEntity<Response<UserResponseDTO>> findMe() {
         return ResponseEntity.ok(userService.findMe());
     }
-
-
 }
